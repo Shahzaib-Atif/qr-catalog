@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               Int               @id @default(autoincrement())
+  userName         String            @unique
+  password         String?
+  columnVisibility ColumnVisibility?
+}
+
+model ColumnVisibility {
+  id             Int   @id @default(autoincrement())
+  consultOrders  Json?
+  startWork      Json?
+  primaveraStock Json?
+  user           User  @relation(fields: [userId], references: [id])
+  userId         Int   @unique
+}

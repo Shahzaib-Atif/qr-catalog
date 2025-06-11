@@ -1,0 +1,10 @@
+services:
+  nextjs:
+    container_name: prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: app-nextjs-v2
+    ports:
+      - "3000:3000"
+    env_file: .env
