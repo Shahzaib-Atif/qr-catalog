@@ -29,7 +29,7 @@ export class SupabaseProductRepository implements IProductRepository {
             const { data: product, error } = await this.supabase
                 .from('products')
                 .select('*')
-                .eq('slug', slug)
+                .ilike('slug', slug)
                 .single();
 
             if (error) { throw new Error(`Error fetching product by slug: ${slug} => ${error.message}`); }
