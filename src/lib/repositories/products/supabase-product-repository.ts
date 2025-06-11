@@ -24,30 +24,37 @@ export class SupabaseProductRepository implements IProductRepository {
     }
 
     async getProductBySlug(slug: string): Promise<Product | null> {
-        const { data: product, error } = await this.supabase
-            .from('products')
-            .select('*')
-            .eq('slug', slug)
-            .single();
 
-        if (error) {
+        try {
+            const { data: product, error } = await this.supabase
+                .from('products')
+                .select('*')
+                .eq('slug', slug)
+                .single();
+
+            if (error) { throw new Error(`Error fetching product by slug: ${error.message}`); }
+
+            return product as Product;
+        } catch (error) {
             console.error(error);
             return null;
         }
-
-        return product as Product;
     }
 
-    async getImageUrl(name: string) {
-        const { data, error } = await this.supabase.storage
-            .from('images')
-            .createSignedUrl(name, 60); // URL valid for 60 seconds
+    async getImageUrl(name: string): Promise<string | null> {
+        try {
+            const { data, error } = await this.supabase.storage
+                .from('images')
+                .createSignedUrl(name, 60); // URL valid for 60 seconds
 
-        if (error) {
-            console.error(`Error generating signed URL: ${name}`, error);
+            if (error) { throw new Error(`Error generating signed URL: ${error.message}`); }
+            
+            return data.signedUrl
+
+        }
+        catch (error) {
+            console.error(error);
             return null;
-        } else {
-            return data.signedUrl;
         }
     }
 }

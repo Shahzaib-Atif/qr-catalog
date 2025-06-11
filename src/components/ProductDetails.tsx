@@ -38,6 +38,7 @@ export function ProductDetails({
             placeholder="empty"
             style={{ objectFit: "contain" }}
             onLoad={() => setImgLoaded(true)}
+            fill={true}
             className={`transition-opacity duration-300 ${
               imgLoaded ? "opacity-100" : "opacity-0"
             }`}
