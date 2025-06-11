@@ -27,7 +27,7 @@ export function ProductDetails({
       <p className="text-lg mb-4 text-gray-700">{description}</p>
       <div className="relative w-[300px] h-[300px] flex justify-center items-center">
         {!imgLoaded && (
-          <div className="absolute inset-0 animate-pulse bg-gray-300 rounded" />
+          <div className="w-full h-full absolute inset-0 animate-pulse bg-gray-300 rounded" />
         )}
         {imageUrl && (
           <Image
