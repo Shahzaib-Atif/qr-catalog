@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { metadataObj } from "@/js/constants";
@@ -14,8 +13,6 @@ export const metadata: Metadata = {
 const ErrorPage: React.FC = () => {
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Error Page" />
-
       <div className="rounded-sm border border-stroke bg-white px-5 py-10 shadow-default dark:border-strokedark dark:bg-boxdark sm:py-20">
         <div className="mx-auto max-w-[410px]">
           <Image
