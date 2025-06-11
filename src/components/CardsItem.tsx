@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { ProductItemProps } from "@/types/ProductItem";
+import Loader from "./common/Loader";
 
 export function CardsItem({
   name,
@@ -12,14 +12,16 @@ export function CardsItem({
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
-    <div className="mx-auto flex max-w-xl flex-col items-center rounded-lg border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div className="text-center mx-auto flex max-w-xl flex-col items-center rounded-lg border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+      {/* Name & Description */}
       <div className="p-6">
-        <h4 className="mb-2 text-xl font-semibold text-black hover:text-primary dark:text-white dark:hover:text-primary">
-          <Link href="#">{name}</Link>
+        <h4 className="mb-2 text-xl font-semibold text-black dark:text-white">
+          {name}{" "}
         </h4>
-        <p>{description}</p>
+        <p className="text-black dark:text-white">{description}</p>
       </div>
 
+      {/* Image */}
       <div className="block w-full max-w-[450px] p-3">
         {!imgLoaded && (
           <div className="bg-gray-300 absolute inset-0 animate-pulse rounded" />
@@ -31,7 +33,6 @@ export function CardsItem({
             src={imageSrc}
             onLoad={() => setImgLoaded(true)}
             alt="Image"
-            placeholder="empty"
             priority={true}
             className={`h-auto w-full transition-opacity duration-300 ${
               imgLoaded ? "opacity-100" : "opacity-0"
@@ -40,6 +41,13 @@ export function CardsItem({
           />
         )}
       </div>
+
+      {/* Button */}
+      {imgLoaded && (
+        <button className="my-4 inline-flex rounded-md bg-primary px-4.5 py-1.5 font-medium text-white">
+          See more info
+        </button>
+      )}
     </div>
   );
 }
