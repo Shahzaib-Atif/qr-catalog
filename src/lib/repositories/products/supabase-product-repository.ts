@@ -32,7 +32,7 @@ export class SupabaseProductRepository implements IProductRepository {
                 .eq('slug', slug)
                 .single();
 
-            if (error) { throw new Error(`Error fetching product by slug: ${error.message}`); }
+            if (error) { throw new Error(`Error fetching product by slug: ${slug} => ${error.message}`); }
 
             return product as Product;
         } catch (error) {
@@ -48,7 +48,7 @@ export class SupabaseProductRepository implements IProductRepository {
                 .createSignedUrl(name, 60); // URL valid for 60 seconds
 
             if (error) { throw new Error(`Error generating signed URL: ${error.message}`); }
-            
+
             return data.signedUrl
 
         }
