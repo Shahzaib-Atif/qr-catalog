@@ -11,6 +11,11 @@
   "dependencies": {
     "@prisma/client": "^5.13.0",
     "@reduxjs/toolkit": "^2.2.3",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
+    "@supabase/auth-ui-react": "^0.4.7",
+    "@supabase/auth-ui-shared": "^0.1.8",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.50.0",
     "@types/mssql": "^9.1.5",
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
