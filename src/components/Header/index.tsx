@@ -4,6 +4,7 @@ import DropdownUser from "./DropdownUser";
 import Logo from "../Logo";
 import LogoDivmacDark from "../Logo-Divmac-Dark";
 import Image from "next/image";
+import LogoDivmacLight from "../Logo-Divmac-Light";
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
@@ -58,15 +59,14 @@ const Header = (props: {
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
 
-          {/* LOGO */}
-          {/* <Link className="block flex-shrink-0 pl-1 lg:hidden" href="/">
-            <Logo width="55" height="50"></Logo>
-          </Link> */}
-          <div className="block h-auto w-64 flex-shrink-0 ml-2">
-            {/* <Logo width="55" height="50"></Logo> */}
-            <LogoDivmacDark />
-            {/* Uncomment the line below to use the dark logo */}
-            {/* <Image src="/images/logo/divmac-logo-dark.png" alt={"image"} width={200} height={100}></Image> */}
+          {/* LOGO (switch logo based on light/dark theme) */}
+          <div className="ml-2 block h-auto w-64 flex-shrink-0">
+            <span className="block dark:hidden">
+              <LogoDivmacLight />
+            </span>
+            <span className="hidden dark:block">
+              <LogoDivmacDark />
+            </span>
           </div>
         </div>
 

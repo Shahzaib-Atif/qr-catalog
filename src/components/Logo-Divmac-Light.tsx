@@ -14,7 +14,7 @@ export default function LogoDivmacLight() {
         fill="white"
         rx="8"
         stroke="#ddd"
-        stroke-width="1"
+        strokeWidth="1"
       ></rect>
       <text
         x="200"
