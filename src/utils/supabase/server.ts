@@ -11,17 +11,6 @@ export const createClient = (cookieStore: any) => {
         async getAll() {
           return (await cookieStore).getAll()
         },
-        async setAll(cookiesToSet) {
-          try {
-            for (const { name, value, options } of cookiesToSet) {
-              await cookieStore.set(name, value, options);
-            }
-          } catch {
-            // The `setAll` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
-          }
-        },
       },
     },
   );
