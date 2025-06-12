@@ -7,7 +7,7 @@ import Loader from "./common/Loader";
 export function CardsItem({
   name,
   description,
-  imageSrc = "/images/image-not-found.jpg",
+  imageSrc,
 }: ProductItemProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
 
