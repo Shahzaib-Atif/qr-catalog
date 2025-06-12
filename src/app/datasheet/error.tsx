@@ -2,15 +2,9 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import { metadataObj } from "@/js/constants";
 
-export const metadata: Metadata = {
-  ...metadataObj,
-};
-
-const ErrorPage: React.FC = () => {
+export default function ErrorPage({ error }: { error: Error }) {
   return (
     <DefaultLayout>
       <div className="rounded-sm border border-stroke bg-white px-5 py-10 shadow-default dark:border-strokedark dark:bg-boxdark sm:py-20">
@@ -24,12 +18,9 @@ const ErrorPage: React.FC = () => {
 
           <div className="mt-7.5 text-center">
             <h2 className="mb-3 text-2xl font-bold text-black dark:text-white">
-              Sorry, the page can’t be found
+              Something went wrong!
             </h2>
-            <p className="font-medium">
-              An error might have occured. If it keeps happening, please contact
-              the website admininstrator.
-            </p>
+            <p className="text-lg"> {error.message} </p>
             <Link
               href="/"
               className="mt-7.5 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 font-medium text-white hover:bg-opacity-90"
@@ -54,6 +45,4 @@ const ErrorPage: React.FC = () => {
       </div>
     </DefaultLayout>
   );
-};
-
-export default ErrorPage;
+}

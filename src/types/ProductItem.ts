@@ -1,5 +1,5 @@
 export type ProductItemProps = {
-  imageSrc: string;
+  imageSrc?: string;
   name?: string;
   description?: string;
 };
