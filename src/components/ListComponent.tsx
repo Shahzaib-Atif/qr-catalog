@@ -4,11 +4,14 @@ interface ListItem {
   text: string;
 }
 
-const listItems: ListItem[] = [{ text: "A136P1KFA1C_2866415.svg" },{ text: "A136P1KFA1C_2866415.svg" }];
+const listItems: ListItem[] = [
+  { text: "A136P1KFA1C_2866415.svg" },
+  { text: "A136P1KFA1C_2866415.svg" },
+];
 
 const ListComponent: React.FC = () => {
   return (
-    <div className="mx-auto flex max-w-xl flex-col items-center rounded-lg border border-stroke bg-white text-center shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div className="mx-auto flex max-w-xl flex-col rounded-lg border border-stroke bg-white text-center shadow-default dark:border-strokedark dark:bg-boxdark">
       <ul className="mb-3 flex flex-col">
         {listItems.map((item, index) => (
           <li
@@ -46,7 +49,7 @@ const ListComponent: React.FC = () => {
                 </defs>
               </svg>
             </span>
-            <a href={item.text} target="_blank" rel="noopener noreferrer">
+            <a href={item.text} target="_blank" rel="noopener noreferrer" className="underline">
               {item.text}
             </a>
           </li>
