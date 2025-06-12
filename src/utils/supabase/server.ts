@@ -11,6 +11,15 @@ export const createClient = (cookieStore: any) => {
         async getAll() {
           return (await cookieStore).getAll()
         },
+        async setAll(cookiesToSet) {
+          try {
+            for (const { name, value, options } of cookiesToSet) {
+              await cookieStore.set(name, value, options);
+            }
+          } catch (error: any) {
+            console.error("Error setting cookies:", error.message);
+          }
+        },
       },
     },
   );

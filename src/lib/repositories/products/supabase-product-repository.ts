@@ -1,15 +1,15 @@
 // lib/supabase-product-repository.ts
-import { createClient } from '@/utils/supabase/server';
+import { createServerComponentClient, SupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from 'next/headers';
 import { IProductRepository } from '@/lib/repositories/interfaces';
 import { Product } from '@/lib/models';
+import { Database } from "@/types/supabase";
 
 export class SupabaseProductRepository implements IProductRepository {
-    supabase: ReturnType<typeof createClient>;
+    supabase: SupabaseClient<Database>;
 
     constructor() {
-        const cookieStore = cookies();
-        this.supabase = createClient(cookieStore);
+        this.supabase = createServerComponentClient<Database>({ cookies });
     }
 
     async getAllProducts(): Promise<Product[]> {

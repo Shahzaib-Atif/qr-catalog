@@ -37,8 +37,6 @@ function isValidAlphanumeric(str: string, minLength: number = 6): boolean {
 
 // Function to fetch product data by slug with caching
 const getProductData = cache(async (slug: string) => {
-  console.log(`Fetching product data for slug: ${slug}`);
-
   const repo: IProductRepository = new SupabaseProductRepository();
   const product = await repo.getProductBySlug(slug);
   if (!product) {
