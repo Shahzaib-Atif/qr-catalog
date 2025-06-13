@@ -14,6 +14,7 @@ export default function ErrorPage({ error }: { error: Error }) {
             alt="illustration"
             width={400}
             height={400}
+            priority={true}
           />
 
           <div className="mt-7.5 text-center">
