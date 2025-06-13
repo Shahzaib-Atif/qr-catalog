@@ -33,7 +33,7 @@ export function CardsItem({ name, description, imageSrc }: ProductItemProps) {
             className={`h-auto w-full transition-opacity duration-300 ${
               imgLoaded ? "opacity-100" : "opacity-0"
             }`}
-            sizes="(max-width: 640px) 100vw, 450px"
+            // sizes="(max-width: 640px) 100vw, 450px"
           />
         )}
       </div>

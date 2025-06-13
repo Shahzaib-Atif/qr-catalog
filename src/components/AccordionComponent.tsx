@@ -16,7 +16,7 @@ const AccordionComponent = () => {
   };
 
   return (
-    <div className="rounded-md border border-stroke p-4 shadow-9 dark:border-strokedark dark:shadow-none sm:p-6">
+    <div className="rounded-md border border-stroke p-4 shadow-9 dark:border-strokedark dark:shadow-none sm:p-6 w-full">
       <button
         className="active flex w-full items-center gap-1.5 sm:gap-3 xl:gap-6"
         onClick={() => handleToggle()}
