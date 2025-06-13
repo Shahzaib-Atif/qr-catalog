@@ -11,7 +11,7 @@ const listItems: ListItem[] = [
 
 const ListComponent: React.FC = () => {
   return (
-    <div className="mx-auto flex max-w-xl flex-col rounded-lg border border-stroke bg-white text-center shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div className="mx-auto flex max-w-xl flex-col rounded-lg bg-white text-center shadow-default dark:bg-boxdark">
       <ul className="mb-3 flex flex-col">
         {listItems.map((item, index) => (
           <li
@@ -49,7 +49,7 @@ const ListComponent: React.FC = () => {
                 </defs>
               </svg>
             </span>
-            <a href={item.text} target="_blank" rel="noopener noreferrer" className="underline">
+            <a href={item.text} target="_blank" rel="noopener noreferrer" className="underline text-[15px] text-black dark:text-white">
               {item.text}
             </a>
           </li>

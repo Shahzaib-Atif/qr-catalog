@@ -21,13 +21,13 @@ const AccordionComponent = () => {
         className="active flex w-full items-center gap-1.5 sm:gap-3 xl:gap-6"
         onClick={() => handleToggle()}
       >
-        <div className="flex h-10.5 w-full max-w-10.5 items-center justify-center rounded-md bg-[#F3F5FC] dark:bg-meta-4">
+        <div className="flex h-9 max-h-10.5 w-9 max-w-10.5 items-center justify-center rounded-md bg-[#F3F5FC] dark:bg-meta-4">
           <svg
             className={`fill-primary stroke-primary duration-200 ease-in-out dark:fill-white dark:stroke-white ${
               active ? "rotate-180" : ""
             }`}
-            width="18"
-            height="10"
+            width="14"
+            height="8"
             viewBox="0 0 18 10"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -40,20 +40,18 @@ const AccordionComponent = () => {
           </svg>
         </div>
 
-        <div>
-          <h4 className="text-left text-title-xsm font-medium text-black dark:text-white">
-            {header}
-          </h4>
+        <div className="ml-1 text-left text-lg font-medium text-black dark:text-white">
+          <h4> {header} </h4>
         </div>
       </button>
 
       <div
         ref={contentEl}
-        className={`ml-3 mt-5 duration-200 ease-in-out ${
+        className={`ml-1 mt-2 duration-200 ease-in-out ${
           active ? "block" : "hidden"
         }`}
       >
-        <ListComponent></ListComponent>
+        <ListComponent />
       </div>
     </div>
   );
