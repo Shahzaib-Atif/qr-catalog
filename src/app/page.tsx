@@ -1,11 +1,8 @@
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import HomePage from "@/components/HomePage";
-import { Metadata } from "next/types";
+import { metadataObj } from "@/utils/metadataObj";
 
-export const metadata: Metadata = {
-  title: "QR-Catalog Web App | Powered by Divmac",
-  description: "This is made with Nextjs and Tailwind",
-};
+export const metadata = metadataObj;
 
 export default function Home() {
   return (

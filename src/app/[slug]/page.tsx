@@ -3,6 +3,9 @@ import { IProductRepository } from "@/lib/repositories/interfaces";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { CardsItem } from "@/components/CardsItem";
 import { cache } from "react";
+import { metadataObj } from "@/utils/metadataObj";
+
+export const metadata = metadataObj;
 
 export default async function ProductPage({
   params,
