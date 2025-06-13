@@ -55,12 +55,12 @@ const DropdownUser = () => {
         <span className="my-auto rounded-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
+            width="36"
+            height="36"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="0.75"
             strokeLinecap="square"
             strokeLinejoin="bevel"
           >
