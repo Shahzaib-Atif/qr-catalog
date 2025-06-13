@@ -46,7 +46,7 @@ export default function LogoDivmacLight() {
         y="95"
         fontFamily="Arial, sans-serif"
         fontSize="18"
-        fill="#6b7280"
+        fill="#1f2937"
         textAnchor="middle"
         letterSpacing="1px"
       >

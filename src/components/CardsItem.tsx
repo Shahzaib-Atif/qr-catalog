@@ -33,17 +33,9 @@ export function CardsItem({ name, description, imageSrc }: ProductItemProps) {
             className={`h-auto w-full transition-opacity duration-300 ${
               imgLoaded ? "opacity-100" : "opacity-0"
             }`}
-            // sizes="(max-width: 640px) 100vw, 450px"
           />
         )}
       </div>
-
-      {/* Button */}
-      {/* {imgLoaded && (
-        <button className="my-4 inline-flex rounded-md bg-primary px-4.5 py-1.5 font-medium text-white">
-          See more info
-        </button>
-      )} */}
 
       {/* Accordion Component */}
       {imgLoaded && (
