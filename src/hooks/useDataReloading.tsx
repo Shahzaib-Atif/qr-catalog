@@ -39,7 +39,7 @@ export function useDataReloading(
     );
 
     return () => {
-      clearTimeout(timeoutId);
+      clearInterval(timeoutId);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
 import { ProductItemProps } from "@/types/ProductItem";
 import AccordionComponent from "./AccordionComponent";
+import { ImageWithSkeleton } from "./ImageWithSkeleton";
 
 export function CardsItem({ name, description, imageSrc }: ProductItemProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -18,24 +18,11 @@ export function CardsItem({ name, description, imageSrc }: ProductItemProps) {
       </div>
 
       {/* Image */}
-      <div className="block w-full max-w-[450px] p-3">
-        {!imgLoaded && (
-          <div className="bg-gray-300 absolute inset-0 animate-pulse rounded" />
-        )}
-        {imageSrc && (
-          <Image
-            width={400}
-            height={300}
-            src={imageSrc}
-            onLoad={() => setImgLoaded(true)}
-            alt="Image"
-            priority={true}
-            className={`h-auto w-full transition-opacity duration-300 ${
-              imgLoaded ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        )}
-      </div>
+      <ImageWithSkeleton
+        imgLoaded={imgLoaded}
+        setImgLoaded={setImgLoaded}
+        imageSrc={imageSrc}
+      />
 
       {/* Accordion Component */}
       {imgLoaded && (

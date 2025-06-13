@@ -2,9 +2,6 @@ import React, { useRef, useState } from "react";
 import ListComponent from "./ListComponent";
 
 const AccordionComponent = () => {
-  const contentEl = useRef<HTMLDivElement>(null);
-  const header = "Technical documents";
-
   const [active, setActive] = useState<boolean>(false);
 
   const handleToggle = () => {
@@ -16,11 +13,12 @@ const AccordionComponent = () => {
   };
 
   return (
-    <div className="rounded-md border border-stroke p-4 shadow-9 dark:border-strokedark dark:shadow-none sm:p-6 w-full">
+    <div className="w-full rounded-md border border-stroke p-4 shadow-9 dark:border-strokedark dark:shadow-none sm:p-6">
       <button
         className="active flex w-full items-center gap-1.5 sm:gap-3 xl:gap-6"
         onClick={() => handleToggle()}
       >
+        {/* Icon */}
         <div className="flex h-9 max-h-10.5 w-9 max-w-10.5 items-center justify-center rounded-md bg-[#F3F5FC] dark:bg-meta-4">
           <svg
             className={`fill-primary stroke-primary duration-200 ease-in-out dark:fill-white dark:stroke-white ${
@@ -40,13 +38,14 @@ const AccordionComponent = () => {
           </svg>
         </div>
 
+        {/* Header */}
         <div className="ml-1 text-left text-lg font-medium text-black dark:text-white">
-          <h4> {header} </h4>
+          <h4> Technical documents </h4>
         </div>
       </button>
 
+      {/* Content */}
       <div
-        ref={contentEl}
         className={`ml-1 mt-2 duration-200 ease-in-out ${
           active ? "block" : "hidden"
         }`}
