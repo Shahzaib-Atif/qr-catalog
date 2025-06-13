@@ -60,7 +60,7 @@ const Header = (props: {
           {/* <!-- Hamburger Toggle BTN --> */}
 
           {/* LOGO (switch logo based on light/dark theme) */}
-          <div className="ml-2 block h-auto w-64 flex-shrink-0">
+          <div className="ml-2 block h-auto flex-shrink-0">
             <span className="block dark:hidden">
               <LogoDivmacLight />
             </span>
