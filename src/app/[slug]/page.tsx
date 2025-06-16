@@ -1,9 +1,8 @@
-import { SupabaseProductRepository } from "@/lib/repositories/products/supabase-product-repository";
-import { IProductRepository } from "@/lib/repositories/interfaces";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { CardsItem } from "@/components/CardsItem";
 import { cache } from "react";
 import { metadataObj } from "@/utils/metadataObj";
+import { getImageUrl, getProductBySlug } from "../actions/productActions";
 
 export const metadata = metadataObj;
 
@@ -40,12 +39,11 @@ function isValidAlphanumeric(str: string, minLength: number = 6): boolean {
 
 // Function to fetch product data by slug with caching
 const getProductData = cache(async (slug: string) => {
-  const repo: IProductRepository = new SupabaseProductRepository();
-  const product = await repo.getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) {
     throw new Error(`No product found with the name '${slug}'!`);
   }
 
-  const signedUrl = product ? await repo.getImageUrl(product.image_url) : "";
+  const signedUrl = product ? await getImageUrl(product.image_url) : "";
   return { product, signedUrl };
 });

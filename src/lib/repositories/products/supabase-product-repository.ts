@@ -6,27 +6,23 @@ import { Product } from '@/lib/models';
 import { Database } from "@/types/supabase";
 
 export class SupabaseProductRepository implements IProductRepository {
-    supabase: SupabaseClient<Database>;
-
-    constructor() {
-        this.supabase = createServerComponentClient<Database>({ cookies });
-    }
-
-    async getAllProducts(): Promise<Product[]> {
-        const { data: products, error } = await this.supabase.from("products").select('*');
-
-        if (error) {
-            console.error(error);
-            return [];
+    async getAllProducts(): Promise<Product[] | null> {
+        try {
+            const supabase = this.createClient();
+            const { data: products, error } = await supabase.from("products").select('*');
+            if (error) { throw new Error(`Error fetching all products => ${error.message}`); }
+            return products as Product[];
         }
-
-        return products as Product[];
+        catch (error) {
+            console.error(error);
+            return null;
+        }
     }
 
     async getProductBySlug(slug: string): Promise<Product | null> {
-
         try {
-            const { data: product, error } = await this.supabase
+            const supabase = this.createClient();
+            const { data: product, error } = await supabase
                 .from('products')
                 .select('*')
                 .ilike('slug', slug)
@@ -43,7 +39,8 @@ export class SupabaseProductRepository implements IProductRepository {
 
     async getImageUrl(name: string): Promise<string | null> {
         try {
-            const { data, error } = await this.supabase.storage
+            const supabase = this.createClient();
+            const { data, error } = await supabase.storage
                 .from('images')
                 .createSignedUrl(name, 60); // URL valid for 60 seconds
 
@@ -56,5 +53,10 @@ export class SupabaseProductRepository implements IProductRepository {
             console.error(error);
             return null;
         }
+    }
+
+    private createClient() {
+        return createServerComponentClient<Database>({ cookies });
+
     }
 }
