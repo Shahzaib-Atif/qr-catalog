@@ -6,6 +6,20 @@ import { Database } from "@/types/supabase";
 import { ActionResponse } from "@/lib/models";
 
 export class SupabaseAuthRepository implements IAuthRepository {
+    async getUser(): Promise<ActionResponse> {
+        try {
+            const supabase = this.createClient();
+            const { data, error } = await supabase.auth.getUser()
+
+            if (error)
+                return { data: null, error: error.message }
+            else
+                return { data, error: "" };
+        } catch (error: any) {
+            console.error(error);
+            return { data: null, error: error.message };
+        }
+    }
 
     async signUp(email: string, username: string, password: string): Promise<ActionResponse> {
         try {

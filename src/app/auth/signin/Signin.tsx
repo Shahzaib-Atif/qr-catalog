@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import SideLayout from "../signup/components/SideLayout";
-import { signIn } from "@/lib/actions/authActions";
+// import { getUser, signIn } from "@/lib/actions/authActions";
+import { signIn } from "@/lib/actions/clientAuthActions";
 import SignInForm from "./SignInForm";
 
 const SignIn: React.FC = () => {
@@ -30,6 +31,7 @@ const SignIn: React.FC = () => {
       setError(error.message || "unknown error");
     } finally {
       setLoading(false);
+      window.location.href = '/datasheet'
     }
   };
 
