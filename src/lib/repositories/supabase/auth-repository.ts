@@ -7,12 +7,17 @@ import { ActionResponse } from "@/lib/models";
 
 export class SupabaseAuthRepository implements IAuthRepository {
 
-    async signUp(email: string, password: string): Promise<ActionResponse> {
+    async signUp(email: string, username: string, password: string): Promise<ActionResponse> {
         try {
             const supabase = this.createClient();
             const { data, error } = await supabase.auth.signUp({
                 email,
                 password,
+                options: {
+                    data: {
+                        display_name: username
+                    }
+                }
             })
 
             if (error)
