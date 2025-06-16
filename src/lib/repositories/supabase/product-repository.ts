@@ -1,5 +1,5 @@
 // lib/supabase-product-repository.ts
-import { createServerComponentClient, SupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from 'next/headers';
 import { IProductRepository } from '@/lib/repositories/interfaces';
 import { Product } from '@/lib/models';
@@ -57,6 +57,5 @@ export class SupabaseProductRepository implements IProductRepository {
 
     private createClient() {
         return createServerComponentClient<Database>({ cookies });
-
     }
 }

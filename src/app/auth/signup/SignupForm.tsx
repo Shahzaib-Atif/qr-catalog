@@ -1,55 +1,40 @@
 "use client";
 
-import axios from "axios";
+import { signUp } from "@/app/actions/authActions";
+import ErrorAlert from "@/components/ErrorAlert";
+import SpinnerOne from "@/components/Spinners/SpinnerOne";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function SignupForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  
+
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const password = data.get("password");
-    const userName = data.get("username");
 
-    if (!userName) setError("Please select a user first");
-    else {
-      setError("");
-      setLoading(true);
-      try {
-        const response = await axios.post(
-          "/api/auth/login",
-          {
-            userName,
-            password,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          },
-        );
+    const userName = data.get("username") as string;
+    const email = data.get("email") as string;
+    const password = data.get("password") as string;
 
-        if (response.statusText === "OK") {
-          console.log(response.data);
-          setError("");
-          setTimeout(() => {
-            // router.push("/");
-          }, 500);
-        } else {
-          console.log("response: ", response);
-        }
-      } catch (error: any) {
-        setError(error.response?.data?.message || "unknown error");
-        setLoading(false);
+    setError("");
+    setLoading(true);
+    try {
+      const actionResponse = await signUp(email, password);
+      console.log("actionResponse: ", actionResponse);
+      if (actionResponse.error) {
+        setError(actionResponse.error);
       }
+    } catch (error: any) {
+      setError(error.message || "unknown error");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       {/* Name */}
       <div className="mb-4">
         <label className="mb-2.5 block font-medium text-black dark:text-white">
@@ -58,7 +43,9 @@ export default function SignupForm() {
         <div className="relative">
           <input
             type="text"
+            name="username"
             placeholder="Enter name"
+            required
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
           />
 
@@ -166,7 +153,7 @@ export default function SignupForm() {
       </div>
 
       {/* already have an account? */}
-      <div className="mt-6 text-center">
+      <div className="mb-6 mt-4 text-center">
         <p>
           Already have an account?{" "}
           <Link href="/auth/signin" className="text-primary">
@@ -174,6 +161,9 @@ export default function SignupForm() {
           </Link>
         </p>
       </div>
+
+      {loading && <SpinnerOne />}
+      {error && <ErrorAlert error={error} />}
     </form>
   );
 }

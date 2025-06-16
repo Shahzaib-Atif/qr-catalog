@@ -5,3 +5,8 @@ export type Product = {
     description: string;
     image_url: string;
 }
+
+export type ActionResponse = {
+    data: any;
+    error: string
+}
