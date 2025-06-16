@@ -1,10 +1,10 @@
 import Link from "next/link";
 import DarkModeSwitcher from "./DarkModeSwitcher";
 import DropdownUser from "./DropdownUser";
-import Logo from "../Logo";
-import LogoDivmacDark from "../Logo-Divmac-Dark";
+import Logo from "../Icons/Logo";
+import LogoDivmacDark from "../Icons/Logo-Divmac-Dark";
 import Image from "next/image";
-import LogoDivmacLight from "../Logo-Divmac-Light";
+import LogoDivmacLight from "../Icons/Logo-Divmac-Light";
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;

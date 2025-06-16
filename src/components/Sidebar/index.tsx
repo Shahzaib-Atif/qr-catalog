@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import SidebarLinkGroup from "./SidebarLinkGroup";
-import Logo from "../Logo";
+import Logo from "../Icons/Logo";
 
 interface SidebarProps {
   sidebarOpen: boolean;

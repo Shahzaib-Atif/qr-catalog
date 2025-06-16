@@ -2,7 +2,7 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { CardsItem } from "@/components/CardsItem";
 import { cache } from "react";
 import { metadataObj } from "@/utils/metadataObj";
-import { getImageUrl, getProductBySlug } from "../actions/productActions";
+import { getImageUrl, getProductBySlug } from "../../lib/actions/productActions";
 
 export const metadata = metadataObj;
 
