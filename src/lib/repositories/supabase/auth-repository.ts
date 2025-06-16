@@ -30,6 +30,24 @@ export class SupabaseAuthRepository implements IAuthRepository {
         }
     }
 
+    async signIn(email: string, password: string): Promise<ActionResponse> {
+        try {
+            const supabase = this.createClient();
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            })
+
+            if (error)
+                return { data: null, error: error.message }
+            else
+                return { data, error: "" };
+        } catch (error: any) {
+            console.error(error);
+            return { data: null, error: error.message };
+        }
+    }
+
     private createClient() {
         return createServerComponentClient<Database>({ cookies });
     }

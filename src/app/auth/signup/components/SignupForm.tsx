@@ -1,40 +1,16 @@
-"use client";
-
-import { signUp } from "@/lib/actions/authActions";
+import Link from "next/link";
 import ErrorAlert from "@/components/ErrorAlert";
 import EmailIcon from "@/components/Icons/EmailIcon";
 import PasswordIcon from "@/components/Icons/PasswordIcon";
 import UserIcon from "@/components/Icons/UserIcon";
 import SpinnerOne from "@/components/Spinners/SpinnerOne";
-import Link from "next/link";
-import { useState } from "react";
 
-export default function SignupForm() {
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    const username = data.get("username") as string;
-    const email = data.get("email") as string;
-    const password = data.get("password") as string;
-
-    setError("");
-    setLoading(true);
-    try {
-      const actionResponse = await signUp(email, username, password);
-      console.log("actionResponse: ", actionResponse);
-      if (actionResponse.error) {
-        setError(actionResponse.error);
-      }
-    } catch (error: any) {
-      setError(error.message || "unknown error");
-    } finally {
-      setLoading(false);
-    }
-  };
+export default function SignupForm(props: {
+  handleSubmit: (event: any) => Promise<void>;
+  loading: boolean;
+  error: string;
+}) {
+  const { handleSubmit, loading, error } = props;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -47,8 +23,9 @@ export default function SignupForm() {
           <input
             type="text"
             name="username"
-            placeholder="Enter name"
             required
+            placeholder="Enter name"
+            autoComplete="username"
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
           />
 
@@ -67,7 +44,9 @@ export default function SignupForm() {
           <input
             type="email"
             name="email"
+            required
             placeholder="Enter your email"
+            autoComplete="email"
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
           />
 
@@ -86,6 +65,7 @@ export default function SignupForm() {
           <input
             type="password"
             name="password"
+            required
             autoComplete="current-password"
             placeholder="Enter your password"
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -98,12 +78,14 @@ export default function SignupForm() {
       </div>
 
       {/* Submit button */}
-      <div className="mb-10 mt-15">
-        <input
-          type="submit"
-          value="Create account"
-          className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-        />
+      <div className="mb-10 mt-10">
+        <div className="mb-5">
+          <input
+            type="submit"
+            value="Create account"
+            className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
+          />
+        </div>
       </div>
 
       {/* already have an account? */}

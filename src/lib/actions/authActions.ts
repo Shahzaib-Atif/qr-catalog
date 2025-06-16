@@ -8,3 +8,7 @@ const authRepo: IAuthRepository = new SupabaseAuthRepository();
 export async function signUp(email: string, username: string, password: string) {
     return await authRepo.signUp(email, username, password);
 }
+
+export async function signIn(email: string, password: string) {
+    return await authRepo.signIn(email, password);
+}
