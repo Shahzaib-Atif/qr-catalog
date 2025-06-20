@@ -2,6 +2,7 @@ import ErrorAlert from "@/components/ErrorAlert";
 import EmailIcon from "@/components/Icons/EmailIcon";
 import PasswordIcon from "@/components/Icons/PasswordIcon";
 import SpinnerOne from "@/components/Spinners/SpinnerOne";
+import { signIn } from "@/lib/actions/authActions";
 import Link from "next/link";
 
 export default function SignInForm(props: {
@@ -12,7 +13,7 @@ export default function SignInForm(props: {
   const { handleSubmit, loading, error } = props;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form action={handleSubmit}>
       {/* Username or Email */}
       <div className="mb-4">
         <label className="mb-2.5 block font-medium text-black dark:text-white">

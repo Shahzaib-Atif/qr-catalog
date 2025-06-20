@@ -1,15 +1,14 @@
 // lib/supabase-product-repository.ts
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from 'next/headers';
-import { IAuthRepository } from '@/lib/repositories/interfaces';
-import { Database } from "@/types/supabase";
-import { ActionResponse } from "@/lib/models";
+import { IAuthRepository } from '@/lib/domain/interfaces';
+import { ActionResponse } from "@/lib/domain/models";
+import { SupabaseClient } from '@supabase/supabase-js';
 
 export class SupabaseAuthRepository implements IAuthRepository {
+    constructor(private supabaseClient: SupabaseClient) { }
+
     async getUser(): Promise<ActionResponse> {
         try {
-            const supabase = this.createClient();
-            const { data, error } = await supabase.auth.getUser()
+            const { data, error } = await this.supabaseClient.auth.getUser()
 
             if (error)
                 return { data: null, error: error.message }
@@ -23,8 +22,7 @@ export class SupabaseAuthRepository implements IAuthRepository {
 
     async signUp(email: string, username: string, password: string): Promise<ActionResponse> {
         try {
-            const supabase = this.createClient();
-            const { data, error } = await supabase.auth.signUp({
+            const { data, error } = await this.supabaseClient.auth.signUp({
                 email,
                 password,
                 options: {
@@ -46,8 +44,7 @@ export class SupabaseAuthRepository implements IAuthRepository {
 
     async signIn(email: string, password: string): Promise<ActionResponse> {
         try {
-            const supabase = this.createClient();
-            const { data, error } = await supabase.auth.signInWithPassword({
+            const { data, error } = await this.supabaseClient.auth.signInWithPassword({
                 email,
                 password,
             })
@@ -62,7 +59,4 @@ export class SupabaseAuthRepository implements IAuthRepository {
         }
     }
 
-    private createClient() {
-        return createServerComponentClient<Database>({ cookies });
-    }
 }

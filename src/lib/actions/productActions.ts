@@ -1,8 +1,8 @@
 // app/actions/productActions.ts
 "use server";
 
-import { IProductRepository } from '@/lib/repositories/interfaces';
-import { SupabaseProductRepository } from '@/lib/repositories/supabase/product-repository';
+import { IProductRepository } from '@/lib/domain/interfaces';
+import { SupabaseProductRepository } from '@/lib/repositories/supabase/product.repository';
 
 const productRepo: IProductRepository = new SupabaseProductRepository();
 

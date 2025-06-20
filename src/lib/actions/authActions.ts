@@ -1,9 +1,8 @@
-"use server"
+import { IAuthRepository } from "@/lib/domain/interfaces"
+import { SupabaseAuthRepository } from "@/lib/repositories/supabase/auth.repository";
+import { supabase } from '@/utils/supabase/client';
 
-import { IAuthRepository } from "@/lib/repositories/interfaces"
-import { SupabaseAuthRepository } from "@/lib/repositories/supabase/auth-repository";
-
-const authRepo: IAuthRepository = new SupabaseAuthRepository();
+const authRepo: IAuthRepository = new SupabaseAuthRepository(supabase);
 
 export async function signUp(email: string, username: string, password: string) {
     return await authRepo.signUp(email, username, password);

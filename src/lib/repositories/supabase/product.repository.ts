@@ -1,8 +1,8 @@
 // lib/supabase-product-repository.ts
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from 'next/headers';
-import { IProductRepository } from '@/lib/repositories/interfaces';
-import { Product } from '@/lib/models';
+import { IProductRepository } from '@/lib/domain/interfaces';
+import { Product } from '@/lib/domain/models';
 import { Database } from "@/types/supabase";
 
 export class SupabaseProductRepository implements IProductRepository {

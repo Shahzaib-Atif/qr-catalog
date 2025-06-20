@@ -1,7 +1,8 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSessionVerification } from "@/hooks/useSessionVerification";
 import Loader from "./common/Loader";
+import { getUser } from "@/lib/actions/authActions";
 
 type Props = {};
 
@@ -11,6 +12,12 @@ export default function HomePage({}: Props) {
     loggedIn: true,
     loading: false,
   };
+
+  useEffect(() => {
+    getUser().then((res) => {
+      console.log("user:", res.data);
+    });
+  }, []);
 
   return (
     <>

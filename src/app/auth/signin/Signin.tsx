@@ -2,20 +2,18 @@
 import React, { useState } from "react";
 import SideLayout from "../signup/components/SideLayout";
 // import { getUser, signIn } from "@/lib/actions/authActions";
-import { signIn } from "@/lib/actions/clientAuthActions";
+import { signIn } from "@/lib/actions/authActions";
 import SignInForm from "./SignInForm";
+import { redirect } from "next/navigation";
 
 const SignIn: React.FC = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
-
+  const handleSubmit = async (formdata: FormData) => {
     // get form data
-    const data = new FormData(event.currentTarget);
-    const email = data.get("email") as string;
-    const password = data.get("password") as string;
+    const email = formdata.get("email") as string;
+    const password = formdata.get("password") as string;
 
     // start loading
     setError("");
@@ -23,7 +21,6 @@ const SignIn: React.FC = () => {
 
     try {
       const actionResponse = await signIn(email, password);
-      console.log("actionResponse: ", actionResponse);
       if (actionResponse.error) {
         setError(actionResponse.error);
       }
@@ -31,7 +28,7 @@ const SignIn: React.FC = () => {
       setError(error.message || "unknown error");
     } finally {
       setLoading(false);
-      window.location.href = '/datasheet'
+      redirect("/");
     }
   };
 
