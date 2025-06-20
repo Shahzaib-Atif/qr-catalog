@@ -34,6 +34,9 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Build Next.js app
-        run: yarn run build
+        run: yarn build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
