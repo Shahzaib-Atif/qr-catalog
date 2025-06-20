@@ -14,3 +14,7 @@ export async function signIn(email: string, password: string) {
 export async function getUser() {
     return await authRepo.getUser();
 }
+
+export async function signOut() {
+    return await authRepo.signOut();
+}

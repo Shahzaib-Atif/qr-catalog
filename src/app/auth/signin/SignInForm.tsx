@@ -2,7 +2,6 @@ import ErrorAlert from "@/components/ErrorAlert";
 import EmailIcon from "@/components/Icons/EmailIcon";
 import PasswordIcon from "@/components/Icons/PasswordIcon";
 import SpinnerOne from "@/components/Spinners/SpinnerOne";
-import { signIn } from "@/lib/actions/authActions";
 import Link from "next/link";
 
 export default function SignInForm(props: {

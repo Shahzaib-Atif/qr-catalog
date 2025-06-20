@@ -9,7 +9,8 @@ export interface IProductRepository {
 }
 
 export interface IAuthRepository {
-  signUp(email: string, username: string, password: string): Promise<ActionResponse>;
-  signIn(email: string, password: string): Promise<ActionResponse>;
-  getUser(): Promise<ActionResponse>;
+  signUp(email: string, username: string, password: string): Promise<any>;
+  signIn(email: string, password: string): Promise<any>;
+  signOut(): void;
+  getUser(): Promise<any>;
 }

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import axios from "axios";
+import { signOut } from "@/lib/actions/authActions";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -37,7 +37,7 @@ const DropdownUser = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("/api/auth/logout");
+      await signOut();
     } catch (error) {
       console.error(error);
     }

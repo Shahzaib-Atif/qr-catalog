@@ -15,7 +15,7 @@ export default function HomePage({}: Props) {
 
   useEffect(() => {
     getUser().then((res) => {
-      console.log("user:", res.data);
+      console.log("user:", res);
     });
   }, []);
 
