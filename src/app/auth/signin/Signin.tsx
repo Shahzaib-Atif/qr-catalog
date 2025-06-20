@@ -16,19 +16,21 @@ const SignIn: React.FC = () => {
     const password = formdata.get("password") as string;
 
     // start loading
+    let loginFailed = false;
     setError("");
     setLoading(true);
 
     try {
       const actionResponse = await signIn(email, password);
       if (actionResponse.error) {
-        setError(actionResponse.error);
+        throw(actionResponse.error);
       }
     } catch (error: any) {
-      setError(error.message || "unknown error");
+      setError(error.message || error.toString());
+      loginFailed = true;
     } finally {
       setLoading(false);
-      redirect("/");
+      if (!loginFailed) redirect("/");
     }
   };
 
