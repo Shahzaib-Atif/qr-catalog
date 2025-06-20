@@ -1,23 +1,12 @@
 "use client";
-import React, { useEffect } from "react";
-import { useSessionVerification } from "@/hooks/useSessionVerification";
+import React from "react";
 import Loader from "./common/Loader";
-import { getUser } from "@/lib/actions/authActions";
+import { useLogin } from "@/hooks/useLogin";
 
 type Props = {};
 
 export default function HomePage({}: Props) {
-  // const { loggedIn, loading: sessionLoading } = useSessionVerification();
-  const { loggedIn, loading: sessionLoading } = {
-    loggedIn: true,
-    loading: false,
-  };
-
-  useEffect(() => {
-    getUser().then((res) => {
-      console.log("user:", res);
-    });
-  }, []);
+  const { loggedIn, loading: sessionLoading } = useLogin();
 
   return (
     <>
