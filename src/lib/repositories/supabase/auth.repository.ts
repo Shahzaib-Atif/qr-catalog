@@ -1,14 +1,12 @@
 // lib/supabase-product-repository.ts
 import { IAuthRepository } from '@/lib/domain/interfaces';
 import { ActionResponse } from "@/lib/domain/models";
-import { SupabaseClient } from '@supabase/supabase-js';
+import { supabase } from '@/utils/supabase/client';
 
 export class SupabaseAuthRepository implements IAuthRepository {
-    constructor(private supabaseClient: SupabaseClient) { }
-
     async getUser(): Promise<ActionResponse> {
         try {
-            const { data, error } = await this.supabaseClient.auth.getUser()
+            const { data, error } = await supabase.auth.getUser()
 
             if (error)
                 return { data: null, error: error.message }
@@ -22,7 +20,7 @@ export class SupabaseAuthRepository implements IAuthRepository {
 
     async signUp(email: string, username: string, password: string): Promise<ActionResponse> {
         try {
-            const { data, error } = await this.supabaseClient.auth.signUp({
+            const { data, error } = await supabase.auth.signUp({
                 email,
                 password,
                 options: {
@@ -44,7 +42,7 @@ export class SupabaseAuthRepository implements IAuthRepository {
 
     async signIn(email: string, password: string): Promise<ActionResponse> {
         try {
-            const { data, error } = await this.supabaseClient.auth.signInWithPassword({
+            const { data, error } = await supabase.auth.signInWithPassword({
                 email,
                 password,
             })

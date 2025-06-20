@@ -8,7 +8,11 @@ const nextConfig = {
                 hostname: "**", // This matches any hostname (use with caution)
             },
         ],
-    }
+    },
+    webpack: (config) => {
+        config.module.exprContextCritical = false;
+        return config;
+    },
 };
 
 export default nextConfig;
