@@ -2,8 +2,10 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { CardsItem } from "@/components/CardsItem";
 import { cache } from "react";
 import { metadataObj } from "@/utils/metadataObj";
-import { getImageUrl, getProductBySlug } from "../../lib/actions/productActions";
-import { getUser } from "@/lib/actions/authActions";
+import {
+  getImageUrl,
+  getProductBySlug,
+} from "../../lib/actions/productActions";
 
 export const metadata = metadataObj;
 
@@ -40,9 +42,13 @@ function isValidAlphanumeric(str: string, minLength: number = 6): boolean {
 
 // Function to fetch product data by slug with caching
 const getProductData = cache(async (slug: string) => {
-  const user = await getUser();
-  console.log("user: ", user);
-  
+  // try {
+  //   const user = await getUser();
+  //   console.log("user: ", user);
+  // } catch (error) {
+  //   console.error("Error fetching user:", error);
+  // }
+
   const product = await getProductBySlug(slug);
   if (!product) {
     throw new Error(`No product found with the name '${slug}'!`);

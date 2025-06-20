@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { ProductItemProps } from "@/types/ProductItem";
 import AccordionComponent from "./AccordionComponent";
 import { ImageWithSkeleton } from "./ImageWithSkeleton";
+import { useLogin } from "@/hooks/useLogin";
 
 export function CardsItem({ name, description, imageSrc }: ProductItemProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
