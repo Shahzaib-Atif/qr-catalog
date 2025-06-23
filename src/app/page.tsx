@@ -8,6 +8,7 @@ import { getAllProducts } from "@/lib/actions/actions.server.product";
 
 export const metadata = metadataObj;
 
+// Main component for the home page
 export default async function Home() {
   return (
     <DefaultLayout>
@@ -18,6 +19,8 @@ export default async function Home() {
   );
 }
 
+
+// Function to fetch user and products, then render the HomePage component
 async function ServerHomePage() {
   const user = await getUser();
   const products = await getAllProducts();

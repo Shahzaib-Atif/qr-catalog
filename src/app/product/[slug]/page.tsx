@@ -1,33 +1,55 @@
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { ProductsPage } from "@/app/product/[slug]/ProductsPage";
-import { cache } from "react";
+import { cache, Suspense } from "react";
 import { metadataObj } from "@/utils/metadataObj";
-import { getProductBySlug, getImageUrl } from "@/lib/actions/actions.server.product";
+import {
+  getProductBySlug,
+  getImageUrl,
+} from "@/lib/actions/actions.server.product";
+import Loader from "@/components/common/Loader";
 
 export const metadata = metadataObj;
+type Props = {
+  params: Promise<{ slug: string }>;
+};
 
-export default async function ProductPage({
-  params,
-}: {
+// Main component for the product page
+export default async function ProductPage({ params }: Props) {
+  return (
+    <DefaultLayout>
+      <Suspense fallback={<Loader />}>
+        <ServerProductsPage params={params} />
+      </Suspense>
+    </DefaultLayout>
+  );
+}
+
+// Function to fetch product by slug and render the ProductsPage component
+async function ServerProductsPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   // Ensure the slug is valid
-  const resolvedParams = await params;
+  const resolvedParams = await props.params;
   const slug = resolvedParams.slug;
   if (!isValidAlphanumeric(slug)) {
     throw new Error(`The parameter '${slug}' does not seem valid!`);
   }
 
-  const { product, signedUrl } = await getProductData(slug);
+  // Fetch the product by slug
+  const product = await getProductBySlug(slug);
+  if (!product) {
+    throw new Error(`No product found with the name '${slug}'!`);
+  }
+
+  // Fetch the signed URL for the product image
+  const signedUrl = product ? await getImageUrl(product.image_url) : "";
 
   return (
-    <DefaultLayout>
-      <ProductsPage
-        name={product?.name}
-        description={product?.description}
-        imageSrc={signedUrl || undefined}
-      />
-    </DefaultLayout>
+    <ProductsPage
+      name={product?.name}
+      description={product?.description}
+      imageSrc={signedUrl || undefined}
+    />
   );
 }
 
@@ -36,21 +58,3 @@ function isValidAlphanumeric(str: string, minLength: number = 6): boolean {
   const alphanumericRegex = /^[a-zA-Z0-9]+$/;
   return str.length >= minLength && alphanumericRegex.test(str);
 }
-
-// Function to fetch product data by slug with caching
-const getProductData = cache(async (slug: string) => {
-  // try {
-  //   const user = await getUser();
-  //   console.log("user: ", user);
-  // } catch (error) {
-  //   console.error("Error fetching user:", error);
-  // }
-
-  const product = await getProductBySlug(slug);
-  if (!product) {
-    throw new Error(`No product found with the name '${slug}'!`);
-  }
-
-  const signedUrl = product ? await getImageUrl(product.image_url) : "";
-  return { product, signedUrl };
-});
