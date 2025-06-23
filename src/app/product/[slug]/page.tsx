@@ -5,7 +5,7 @@ import { metadataObj } from "@/utils/metadataObj";
 import {
   getImageUrl,
   getProductBySlug,
-} from "../../lib/actions/productActions";
+} from "../../../lib/actions/productActions";
 
 export const metadata = metadataObj;
 

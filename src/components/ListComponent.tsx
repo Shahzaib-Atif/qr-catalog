@@ -49,7 +49,20 @@ const ListComponent: React.FC = () => {
                 </defs>
               </svg>
             </span>
-            <a href={item.text} target="_blank" rel="noopener noreferrer" className="underline text-[15px] text-black dark:text-white">
+            {/* <a
+              href={item.text}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[15px] text-black underline dark:text-white"
+            > */}
+            <a
+              href={
+                "https://pintobrasilsgps.sharepoint.com/sites/AreadeClienteDivmac/Documentos%20Partilhados/Forms/AllItems.aspx?OR=Teams%2DHL&CT=1663580941780&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIyNy8yMjA3MzEwMTAwNSIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D&noAuthRedirect=1&id=%2Fsites%2FAreadeClienteDivmac%2FDocumentos%20Partilhados%2FBosch%20Chassis%20Systems%20India%2F221182%20Posto%20Labeling%20%28PO%2D0087347333%29%2F221182%20Posto%20Labeling%20%28PO%2D0087347333%29%2FPAK50%20STATION%20230738%2D01%20EN%2Epdf&viewid=e4ef741d%2De31b%2D47d6%2Da553%2D7105f160bc7a&parent=%2Fsites%2FAreadeClienteDivmac%2FDocumentos%20Partilhados%2FBosch%20Chassis%20Systems%20India%2F221182%20Posto%20Labeling%20%28PO%2D0087347333%29%2F221182%20Posto%20Labeling%20%28PO%2D0087347333%29"
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[15px] text-black underline dark:text-white"
+            >
               {item.text}
             </a>
           </li>
