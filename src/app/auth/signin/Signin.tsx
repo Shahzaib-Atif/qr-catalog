@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import SideLayout from "../signup/components/SideLayout";
 // import { getUser, signIn } from "@/lib/actions/authActions";
-import { signIn } from "@/lib/actions/authActions";
+import { signIn } from "@/lib/actions/actions.client.auth";
 import SignInForm from "./SignInForm";
 import { redirect } from "next/navigation";
 

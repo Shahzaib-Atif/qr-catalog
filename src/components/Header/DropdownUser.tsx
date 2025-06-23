@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
-import { signOut } from "@/lib/actions/authActions";
+import { signOut } from "@/lib/actions/actions.client.auth";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);

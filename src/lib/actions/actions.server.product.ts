@@ -2,7 +2,7 @@
 "use server";
 
 import { IProductRepository } from '@/lib/domain/interfaces';
-import { SupabaseProductRepository } from '@/lib/repositories/supabase/product.repository';
+import { SupabaseProductRepository } from '@/lib/repositories/supabase/repo.server.product';
 
 const productRepo: IProductRepository = new SupabaseProductRepository();
 

@@ -1,5 +1,5 @@
 "use client"
-import { signUp } from "@/lib/actions/authActions";
+import { signUp } from "@/lib/actions/actions.client.auth";
 import { useState } from "react";
 import SideLayout from "./SideLayout";
 import SignupForm from "./SignupForm";

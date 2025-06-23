@@ -1,5 +1,5 @@
 import { IAuthRepository } from "@/lib/domain/interfaces"
-import { SupabaseAuthRepository } from "@/lib/repositories/supabase/auth.repository";
+import { SupabaseAuthRepository } from "@/lib/repositories/supabase/repo.client.auth";
 
 const authRepo: IAuthRepository = new SupabaseAuthRepository();
 

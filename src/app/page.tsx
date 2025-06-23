@@ -1,13 +1,23 @@
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import HomePage from "@/components/HomePage";
 import { metadataObj } from "@/utils/metadataObj";
+import { getUser } from "@/lib/actions/actions.server.auth";
+import { Suspense } from "react";
+import Loader from "@/components/common/Loader";
 
 export const metadata = metadataObj;
 
-export default function Home() {
+export default async function Home() {
   return (
     <DefaultLayout>
-      <HomePage />
+      <Suspense fallback={<Loader />}>
+        <ServerHomePage />
+      </Suspense>
     </DefaultLayout>
   );
+}
+
+async function ServerHomePage() {
+  const user = await getUser();
+  return <HomePage user={user} />;
 }
