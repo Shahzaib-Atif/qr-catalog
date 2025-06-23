@@ -4,6 +4,7 @@ import { metadataObj } from "@/utils/metadataObj";
 import { getUser } from "@/lib/actions/actions.server.auth";
 import { Suspense } from "react";
 import Loader from "@/components/common/Loader";
+import { getAllProducts } from "@/lib/actions/actions.server.product";
 
 export const metadata = metadataObj;
 
@@ -19,5 +20,6 @@ export default async function Home() {
 
 async function ServerHomePage() {
   const user = await getUser();
-  return <HomePage user={user} />;
+  const products = await getAllProducts();
+  return <HomePage user={user} products={products} />;
 }

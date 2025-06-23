@@ -1,11 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { ProductItemProps } from "@/types/ProductItem";
-import AccordionComponent from "./AccordionComponent";
-import { ImageWithSkeleton } from "./ImageWithSkeleton";
-import { useLogin } from "@/hooks/useLogin";
+import AccordionComponent from "../../../components/AccordionComponent";
+import { ImageWithSkeleton } from "../../../components/ImageWithSkeleton";
 
-export function CardsItem({ name, description, imageSrc }: ProductItemProps) {
+export function ProductsPage({ name, description, imageSrc }: ProductItemProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (

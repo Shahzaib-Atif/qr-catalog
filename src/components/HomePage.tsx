@@ -4,10 +4,12 @@ import Loader from "./common/Loader";
 import { useLogin } from "@/hooks/useLogin";
 import { GetUserDTO } from "@/lib/dtos/user.dto";
 import ListComponent from "./ListComponent";
+import { Product } from "@/lib/domain/models";
+import TableComponent from "./TableComponent";
 
-type Props = { user: GetUserDTO };
+type Props = { user: GetUserDTO, products: Product[] | null };
 
-export default function HomePage({ user }: Props) {
+export default function HomePage({ user, products }: Props) {
   // const { loggedIn, user, loading: sessionLoading } = useLogin();
 
   return (
@@ -17,11 +19,7 @@ export default function HomePage({ user }: Props) {
           <h3 className="text-xl font-medium">Home Page ({user.name?.toUpperCase()})</h3>
         </div>
 
-        <div className="p-4 sm:p-6 xl:p-9">
-          This page shows the products related to the following client:{" "}
-          {user.name}
-        </div>
-        <ListComponent />
+        <TableComponent products={products} />
       </div>
     </div>
   );

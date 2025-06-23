@@ -1,11 +1,8 @@
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import { CardsItem } from "@/components/CardsItem";
+import { ProductsPage } from "@/app/product/[slug]/ProductsPage";
 import { cache } from "react";
 import { metadataObj } from "@/utils/metadataObj";
-import {
-  getImageUrl,
-  getProductBySlug,
-} from "../../../lib/actions/actions.server.product";
+import { getProductBySlug, getImageUrl } from "@/lib/actions/actions.server.product";
 
 export const metadata = metadataObj;
 
@@ -25,7 +22,7 @@ export default async function ProductPage({
 
   return (
     <DefaultLayout>
-      <CardsItem
+      <ProductsPage
         name={product?.name}
         description={product?.description}
         imageSrc={signedUrl || undefined}
