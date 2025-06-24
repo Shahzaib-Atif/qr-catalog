@@ -1,29 +1,31 @@
 import { Product } from "@/types/product";
 import Image from "next/image";
 
-type Props = {products: Product[] | null};
+type Props = { username: string; products: Product[] | null };
 
-const TableComponent = ({products}: Props) => {
+const TableComponent = ({ username, products }: Props) => {
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="px-4 py-6 md:px-6 xl:px-7.5">
         <h4 className="text-xl font-semibold text-black dark:text-white">
-          Products
+          All Products ({username})
         </h4>
       </div>
 
-      <div className="grid grid-cols-2 border-t border-stroke px-4 py-4.5 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5">
+      {/* header */}
+      <div className="grid grid-cols-8 rounded-sm border-t border-stroke bg-gray-2 px-4 py-4.5 dark:border-strokedark dark:bg-meta-4 md:px-6 2xl:px-7.5">
         <div className="col-span-3 flex items-center">
-          <p className="font-medium">Product Name</p>
+          <p className="font-medium underline">PRODUCT</p>
         </div>
-        <div className="col-span-2 hidden items-center sm:flex">
-          <p className="font-medium">Description</p>
+        <div className="col-span-3 flex items-center">
+          <p className="font-medium underline">DESCRIPTION</p>
         </div>
       </div>
 
+      {/* rows */}
       {products?.map((product, key) => (
         <div
-          className="grid grid-cols-6 border-t border-stroke px-4 py-4.5 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5"
+          className="grid grid-cols-8 border-t border-stroke px-4 py-4.5 dark:border-strokedark md:px-6 2xl:px-7.5"
           key={key}
         >
           <div className="col-span-3 flex items-center">
@@ -41,14 +43,18 @@ const TableComponent = ({products}: Props) => {
               </p>
             </div>
           </div>
-          <div className="col-span-2 hidden items-center sm:flex">
+          <div className="col-span-3 flex items-center">
             <p className="text-sm text-black dark:text-white">
               {product.description}
             </p>
           </div>
-          <a className="col-span-2 hidden items-center sm:flex" href={`/product/${product.slug}`} target="_blank">
+          <a
+            className="col-span-2 flex items-center"
+            href={`/product/${product.slug}`}
+            target="_blank"
+          >
             <p className="text-sm text-black dark:text-white">
-              details ...
+              view details ...
             </p>
           </a>
         </div>
