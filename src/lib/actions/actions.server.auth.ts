@@ -23,6 +23,16 @@ export async function getUser(): Promise<GetUserDTO> {
     return parseUser(userDto);
 }
 
+export async function getAllUsers(): Promise<GetUserDTO[]> {
+    const userObjs = await authRepo.getAllUsers();
+
+    // Create userDto for all user objs
+    const users = userObjs.map(userObj => createUserDto(userObj));
+
+    // return parsed userdto or throw error if invalid
+    return users.map(user => parseUser(user));
+}
+
 export async function signOut() {
     return await authRepo.signOut();
 }

@@ -3,6 +3,10 @@ import { IAuthRepository } from '@/lib/domain/interfaces';
 import { supabase } from '@/utils/supabase/client';
 
 export class SupabaseAuthRepository implements IAuthRepository {
+    getAllUsers(): Promise<any[]> {
+        throw new Error('Method not implemented.');
+    }
+
     async getUser() {
         const { data, error } = await supabase.auth.getUser()
 

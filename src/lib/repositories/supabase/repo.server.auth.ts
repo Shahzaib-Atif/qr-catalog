@@ -3,8 +3,11 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from 'next/headers';
 import { IAuthRepository } from '@/lib/domain/interfaces';
 import { Database } from "@/types/supabase";
+import { GetUserDTO } from "@/lib/dtos/user.dto";
+import { listUsers } from "@/utils/supabase/listUsers";
 
 export class SupabaseAuthRepository implements IAuthRepository {
+
     async getUser() {
         const supabase = this.createClient();
         const { data, error } = await supabase.auth.getUser()
@@ -13,6 +16,16 @@ export class SupabaseAuthRepository implements IAuthRepository {
             throw (error);
         else
             return data;
+    }
+
+    async getAllUsers() {
+        const supabase = this.createClient();
+        const { data, error } = await listUsers()
+
+        if (error)
+            throw (error);
+        else
+            return data?.users
     }
 
     async signUp(email: string, username: string, password: string) {
