@@ -14,16 +14,35 @@ export async function signIn(email: string, password: string) {
 }
 
 export async function getUser(): Promise<GetUserDTO> {
-    const user = await authRepo.getUser();
-    const userObj = { name: user.user.user_metadata.display_name, email: user.user.email }
-    const parsedUser = GetUserSchema.safeParse(userObj); // Validate with Zod // based on Supabase for now
+    const { user } = await authRepo.getUser();
+
+    // Create userDto
+    const userDto = createUserDto(user);
+
+    // return parsed userdto or throw error if invalid
+    return parseUser(userDto);
+}
+
+export async function signOut() {
+    return await authRepo.signOut();
+}
+
+function createUserDto(user: any) {
+    const name = user?.user_metadata?.display_name
+    const email = user?.email;
+    const isAdmin = user?.user_metadata?.role === 'admin'
+
+    const userObj: GetUserDTO = { name, email, isAdmin }
+
+    return userObj;
+}
+
+function parseUser(userDto: GetUserDTO) {
+    // Validate with Zod // based on Supabase for now 
+    const parsedUser = GetUserSchema.safeParse(userDto);
     if (parsedUser.success) {
         return parsedUser.data;
     } else {
         throw new Error("Invalid user data");
     }
-}
-
-export async function signOut() {
-    return await authRepo.signOut();
 }

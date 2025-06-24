@@ -23,7 +23,7 @@ const SignIn: React.FC = () => {
     try {
       const actionResponse = await signIn(email, password);
       if (actionResponse.error) {
-        throw(actionResponse.error);
+        throw actionResponse.error;
       }
     } catch (error: any) {
       setError(error.message || error.toString());

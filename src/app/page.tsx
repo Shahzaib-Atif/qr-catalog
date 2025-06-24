@@ -19,10 +19,12 @@ export default async function Home() {
   );
 }
 
-
 // Function to fetch user and products, then render the HomePage component
 async function ServerHomePage() {
+  // await promoteUserToAdmin("84b7dd7b-940d-456b-840e-e54be5aae916");
+
   const user = await getUser();
+
   const products = await getAllProducts();
   return <HomePage user={user} products={products} />;
 }
