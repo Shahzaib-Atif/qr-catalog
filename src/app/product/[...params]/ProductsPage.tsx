@@ -31,7 +31,7 @@ export function ProductsPage({
       {/* Accordion Component */}
       {imgLoaded && (
         <div className="mb-3 mt-3 w-full max-w-[450px] p-3">
-          <AccordionComponent />
+          {/* <AccordionComponent /> */}
         </div>
       )}
     </div>

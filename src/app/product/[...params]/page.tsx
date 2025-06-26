@@ -19,9 +19,8 @@ type Props = {
 
 // Server-side component receives `params` automatically
 export default async function ProductPage({ params }: Props) {
-  await params;
-  const [prodId, ownRef, clientRef, folder] = params?.params ?? [];
-  console.log(clientRef, folder);
+  const resolvedParams = await params;
+  const [prodId, ownRef, clientRef, folderUrl] = resolvedParams?.params ?? [];
 
   return (
     <DefaultLayout>
@@ -30,7 +29,7 @@ export default async function ProductPage({ params }: Props) {
           prodId={prodId}
           ownRef={ownRef}
           clientRef={clientRef}
-          folder={folder}
+          folderUrl={folderUrl}
         />
       </Suspense>
     </DefaultLayout>
@@ -41,18 +40,31 @@ type ServerProductsPageProps = {
   prodId?: string;
   ownRef?: string;
   clientRef?: string;
-  folder?: string;
+  folderUrl?: string;
 };
 
 async function ServerProductsPage({
   prodId,
   ownRef,
   clientRef,
-  folder,
+  folderUrl,
 }: ServerProductsPageProps) {
   if (!prodId || prodId.length != 6) {
     throw new Error("Missing product ID in URL");
   }
+
+  if (!ownRef) {
+    throw new Error("Missing Ref in URL");
+  }
+
+  // const url =
+  //   "https://pintobrasilsgps.sharepoint.com/sites/AreadeClienteDivmac/Documentos%20Partilhados/Forms/AllItems.aspx?id=%2Fsites%2FAreadeClienteDivmac%2FDocumentos%20Partilhados%2FBosch%20Chassis%20Systems%20India&viewid=e4ef741d%2De31b%2D47d6%2Da553%2D7105f160bc7a";
+  // const encodedFolderUrl = encodeURIComponent(btoa(url));
+  const decodedFolderUrl = atob(decodeURIComponent(folderUrl || ""));
+
+  // console.log("Original Folder URL:", url);
+  // console.log("Encoded Folder URL:", encodedFolderUrl);
+  // console.log("Decoded Folder URL:", decodedFolderUrl);
 
   const product = await getProductBySlug(prodId);
   if (!product) {
@@ -69,6 +81,7 @@ async function ServerProductsPage({
       ownRef={ownRef || product.description}
       clientRef={clientRef || ""}
       imageSrc={signedUrl || undefined}
+      folderUrl={decodedFolderUrl}
     />
   );
 }

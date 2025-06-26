@@ -1,4 +1,6 @@
 "use client";
+import AccordionComponent from "@/components/AccordionComponent";
+import ArrowUpRight from "@/components/Icons/ArrowUpRight";
 import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
 import { ProductItemProps, ProductItemProps2 } from "@/types/ProductItem";
 import { useState } from "react";
@@ -8,6 +10,7 @@ export function ProductsPage({
   ownRef,
   clientRef,
   imageSrc,
+  folderUrl,
 }: ProductItemProps2) {
   const [imgLoaded, setImgLoaded] = useState(false);
 
@@ -22,7 +25,7 @@ export function ProductsPage({
         </div>
         <form>
           <div className="p-6.5">
-            <div className="mb-4.5 flex flex-col gap-6 sm:flex-row">
+            <div className="mb-4.5 flex flex-col gap-6 xsm:flex-row">
               <div className="w-full xl:w-1/2">
                 <label className="mb-3 block text-sm font-medium text-black dark:text-white">
                   Product ID
@@ -68,6 +71,20 @@ export function ProductsPage({
                 imageSrc={imageSrc}
               />
             </div>
+
+            <a
+              href={
+                folderUrl?.startsWith("https://")
+                  ? folderUrl
+                  : `https://${folderUrl}`
+              }
+              rel="noopener noreferrer"
+              target="_blank"
+              className="flex flex-row justify-center gap-2 text-lg font-medium text-black dark:text-white"
+            >
+              <ArrowUpRight />
+              <h4> Open Technical documents </h4>
+            </a>
           </div>
         </form>
       </div>

@@ -9,4 +9,5 @@ export type ProductItemProps2 = {
   prodId?: string;
   ownRef?: string;
   clientRef?: string;
+  folderUrl?: string;
 };
