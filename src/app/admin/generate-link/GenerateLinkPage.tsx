@@ -1,6 +1,7 @@
 "use client";
 
 import Loader from "@/components/common/Loader";
+import Check from "@/components/Icons/Check";
 import Copy from "@/components/Icons/Copy";
 import Refresh from "@/components/Icons/Refresh";
 import { useState } from "react";
@@ -19,7 +20,7 @@ export function GenerateLinkPage() {
   const handleCopy = async () => {
     await navigator.clipboard.writeText(finalUrl);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 5000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,12 +131,11 @@ export function GenerateLinkPage() {
                   className="text-gray-500 absolute right-3 top-3 hover:text-primary"
                   type="button"
                 >
-                  <Copy size={24} />
+                  {!copied && <Copy size={24} />}
+                  {copied && <Check />}
                 </button>
               </div>
-              <div className="mt-1 text-sm text-green-500">
-                {copied ? "copied" : ""}{" "}
-              </div>
+              <div className="mt-1 text-sm text-green-500"></div>
             </div>
 
             {/* Button to generate link */}
