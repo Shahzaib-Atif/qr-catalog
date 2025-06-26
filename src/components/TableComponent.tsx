@@ -1,9 +1,8 @@
 import { Product } from "@/types/product";
-import Image from "next/image";
 
 type Props = { username: string; products: Product[] | null };
 
-const TableComponent = ({ username, products }: Props) => {
+const ProductsTable = ({ username, products }: Props) => {
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="px-4 py-6 md:px-6 xl:px-7.5">
@@ -30,14 +29,6 @@ const TableComponent = ({ username, products }: Props) => {
         >
           <div className="col-span-3 flex items-center">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-              {/* <div className="h-12.5 w-15 rounded-md">
-                <Image
-                  src={`/${product.image_url}`}
-                  width={60}
-                  height={50}
-                  alt="Product"
-                />
-              </div> */}
               <p className="text-sm text-black dark:text-white">
                 {product.name}
               </p>
@@ -63,4 +54,4 @@ const TableComponent = ({ username, products }: Props) => {
   );
 };
 
-export default TableComponent;
+export default ProductsTable;

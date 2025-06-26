@@ -1,4 +1,4 @@
-import TableComponent from "./TableComponent";
+import ProductsTable from "@/components/TableComponent";
 import { getUser } from "@/lib/actions/actions.server.auth";
 import { getAllProducts } from "@/lib/actions/actions.server.product";
 import { redirect } from "next/navigation";
@@ -16,7 +16,7 @@ export default async function HomePage() {
         </div>
 
         <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-          <TableComponent username={user?.name} products={products} />
+          <ProductsTable username={user?.name} products={products} />
         </div>
       </div>
     );
