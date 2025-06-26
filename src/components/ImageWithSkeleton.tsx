@@ -9,7 +9,7 @@ export function ImageWithSkeleton({
   imageSrc: string | undefined;
 }) {
   return (
-    <div className="block w-full max-w-[450px] p-3">
+    <div className="mx-auto block w-full max-w-[450px] p-3">
       {!imgLoaded && (
         <div className="bg-gray-300 absolute inset-0 animate-pulse rounded" />
       )}

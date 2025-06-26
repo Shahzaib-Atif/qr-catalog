@@ -4,7 +4,11 @@ import { ProductItemProps } from "@/types/ProductItem";
 import AccordionComponent from "../../../components/AccordionComponent";
 import { ImageWithSkeleton } from "../../../components/ImageWithSkeleton";
 
-export function ProductsPage({ name, description, imageSrc }: ProductItemProps) {
+export function ProductsPage({
+  name,
+  description,
+  imageSrc,
+}: ProductItemProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (

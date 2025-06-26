@@ -1,6 +1,6 @@
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import { ProductsPage } from "@/app/product/[slug]/ProductsPage";
-import { cache, Suspense } from "react";
+import { ProductsPage } from "@/app/product/[slug]/ProductsPageNew";
+import { Suspense } from "react";
 import { metadataObj } from "@/utils/metadataObj";
 import {
   getProductBySlug,
