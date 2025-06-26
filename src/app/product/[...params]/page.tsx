@@ -14,7 +14,7 @@ import Loader from "@/components/common/Loader";
 export const metadata = metadataObj;
 
 type Props = {
-  params: { params?: string[] };
+  params?: Promise<any>;
 };
 
 // Server-side component receives `params` automatically
