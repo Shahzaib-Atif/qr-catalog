@@ -1,8 +1,7 @@
 "use client";
-import AccordionComponent from "@/components/AccordionComponent";
 import ArrowUpRight from "@/components/Icons/ArrowUpRight";
 import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
-import { ProductItemProps, ProductItemProps2 } from "@/types/ProductItem";
+import { ProductItemProps2 } from "@/types/ProductItem";
 import { useState } from "react";
 
 export function ProductsPage({
@@ -80,7 +79,7 @@ export function ProductsPage({
               }
               rel="noopener noreferrer"
               target="_blank"
-              className="flex flex-row justify-center gap-2 text-lg font-medium text-black dark:text-white"
+              className="text-md flex flex-row justify-center gap-2 font-medium text-black dark:text-white"
             >
               <ArrowUpRight />
               <h4> Open Technical documents </h4>
