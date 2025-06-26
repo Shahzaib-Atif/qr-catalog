@@ -60,6 +60,7 @@ async function ServerProductsPage({
   // const url =
   //   "https://pintobrasilsgps.sharepoint.com/sites/AreadeClienteDivmac/Documentos%20Partilhados/Forms/AllItems.aspx?id=%2Fsites%2FAreadeClienteDivmac%2FDocumentos%20Partilhados%2FBosch%20Chassis%20Systems%20India&viewid=e4ef741d%2De31b%2D47d6%2Da553%2D7105f160bc7a";
   // const encodedFolderUrl = encodeURIComponent(btoa(url));
+  const decodedclientRef = atob(decodeURIComponent(clientRef || ""));
   const decodedFolderUrl = atob(decodeURIComponent(folderUrl || ""));
 
   // console.log("Original Folder URL:", url);
@@ -79,7 +80,7 @@ async function ServerProductsPage({
     <ProductsPage
       prodId={product.name}
       ownRef={ownRef || product.description}
-      clientRef={clientRef || ""}
+      clientRef={decodedclientRef || ""}
       imageSrc={signedUrl || undefined}
       folderUrl={decodedFolderUrl}
     />
