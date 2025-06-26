@@ -3,3 +3,10 @@ export type ProductItemProps = {
   name?: string;
   description?: string;
 };
+
+export type ProductItemProps2 = {
+  imageSrc?: string;
+  prodId?: string;
+  ownRef?: string;
+  clientRef?: string;
+};

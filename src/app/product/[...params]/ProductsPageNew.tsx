@@ -1,13 +1,14 @@
 "use client";
 import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
-import { ProductItemProps } from "@/types/ProductItem";
+import { ProductItemProps, ProductItemProps2 } from "@/types/ProductItem";
 import { useState } from "react";
 
 export function ProductsPage({
-  name,
-  description,
+  prodId,
+  ownRef,
+  clientRef,
   imageSrc,
-}: ProductItemProps) {
+}: ProductItemProps2) {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
@@ -19,7 +20,7 @@ export function ProductsPage({
             Product Details
           </h3>
         </div>
-        <form action="#">
+        <form>
           <div className="p-6.5">
             <div className="mb-4.5 flex flex-col gap-6 sm:flex-row">
               <div className="w-full xl:w-1/2">
@@ -28,8 +29,9 @@ export function ProductsPage({
                 </label>
                 <input
                   readOnly
+                  value={prodId}
                   type="text"
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                  className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
               </div>
 
@@ -39,8 +41,9 @@ export function ProductsPage({
                 </label>
                 <input
                   readOnly
+                  value={ownRef}
                   type="text"
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                  className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
               </div>
             </div>
@@ -51,8 +54,9 @@ export function ProductsPage({
               </label>
               <input
                 readOnly
+                value={clientRef}
                 type="email"
-                className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
             </div>
 
