@@ -46,7 +46,7 @@ export function GenerateLinkPage() {
 
     const { productId, ownRef, clientRef, sharepointUrl } = formData;
     setFinalUrl(
-      `http://localhost:3000/product/${productId}/${ownRef}/${clientRef}/${sharepointUrl}`,
+      `${window.location.origin}/product/${productId}/${ownRef}/${clientRef}/${sharepointUrl}`,
     );
   };
 
@@ -116,7 +116,7 @@ export function GenerateLinkPage() {
 
             {/* Show generated Link */}
             <div>
-              <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+              <label className="font-small text-xsm mb-3 block text-black dark:text-white">
                 Generated Link
               </label>
               <div className="relative">
