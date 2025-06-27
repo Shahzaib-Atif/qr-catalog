@@ -4,10 +4,6 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { ProductsPage } from "@/app/product/[...params]/ProductsPageNew";
 import { Suspense } from "react";
 import { metadataObj } from "@/utils/metadataObj";
-import {
-  getProductBySlug,
-  getImageUrl,
-} from "@/lib/actions/actions.server.product";
 import Loader from "@/components/common/Loader";
 
 // Optional
@@ -43,27 +39,26 @@ type ServerProductsPageProps = {
   folderUrl?: string;
 };
 
-async function ServerProductsPage({
-  prodId,
-  ownRef,
-  clientRef,
-  folderUrl,
-}: ServerProductsPageProps) {
+async function ServerProductsPage(props: ServerProductsPageProps) {
+  // Destructure the props
+  const { prodId, ownRef, clientRef, folderUrl } = props;
+
+  // Validate the required parameters
   if (!prodId || prodId.length != 6) {
     throw new Error("Missing product ID in URL");
   }
-
   if (!ownRef) {
     throw new Error("Missing Ref in URL");
   }
 
+  // Decode clientRef and folderUrl
   const { decodedclientRef, decodedFolderUrl } = decodeParams(
     clientRef || "undefined",
     folderUrl || "undefined",
   );
 
-  const imageUrl = process.env.NEXT_PUBLIC_IMAGE_SOURCE + `/${prodId}`;
-  console.log("NEXT_PUBLIC_IMAGE_URL: ", process.env.NEXT_PUBLIC_IMAGE_SOURCE);
+  // Validate ownRef
+  const imageUrl = getImageUrl(ownRef);
 
   return (
     <ProductsPage
@@ -98,4 +93,19 @@ function decodeParams(clientRef: string, folderUrl: string) {
   }
 
   return { decodedclientRef, decodedFolderUrl };
+}
+
+// Function to get the image URL based on codivmacId
+function getImageUrl(ownRef: string) {
+  const codivmacId = ownRef?.slice(0, 6)?.toUpperCase(); // get first 6 characters
+
+  // Validate that the first six characters are alphanumeric
+  if (!/^[a-z0-9]+$/i.test(codivmacId)) {
+    throw new Error(
+      `Invalid codivmacId '${codivmacId}'. It should be 6 alphanumeric characters.`,
+    );
+  }
+
+  const imageUrl = process.env.NEXT_PUBLIC_IMAGE_SOURCE + `/${codivmacId}`;
+  return imageUrl;
 }
