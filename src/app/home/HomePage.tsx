@@ -1,8 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import LogoDivmacDark from "@/components/Icons/Logo-Divmac-Dark";
-import LogoDivmacLight from "@/components/Icons/Logo-Divmac-Light";
 import LinkedinIcon from "@/components/Icons/LinkedinIcon";
 
 const Home: React.FC = () => {
@@ -11,7 +9,7 @@ const Home: React.FC = () => {
       <div className="flex h-screen flex-col overflow-hidden">
         <div className="flex flex-wrap items-center">
           <div className="no-scrollbar h-screen w-full overflow-y-auto border-stroke dark:border-strokedark lg:flex lg:w-1/2 lg:items-center lg:justify-center lg:border-r">
-            <div className="px-4 py-20 xl:px-0">
+            <div className="px-4 py-15 xl:px-0">
               <div>
                 <h1 className="mb-2.5 text-center text-xl font-black text-black dark:text-white lg:text-4xl xl:text-[50px] xl:leading-[60px]">
                   QR-Catalog Web App

@@ -72,7 +72,6 @@ const DropdownUser = () => {
           <li>
             <Link
               href="/admin/generate-link"
-              onClick={handleLogout}
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >
               <LinkIcon />
@@ -82,8 +81,8 @@ const DropdownUser = () => {
           {/* Logout */}
           <li>
             <Link
-              // href="/auth/signin"
-              href="#"
+              href="/auth/signin"
+              // href="#"
               onClick={handleLogout}
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >

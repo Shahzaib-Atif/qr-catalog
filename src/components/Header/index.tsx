@@ -1,9 +1,6 @@
-import Link from "next/link";
 import DarkModeSwitcher from "./DarkModeSwitcher";
 import DropdownUser from "./DropdownUser";
-import Logo from "../Icons/Logo";
 import LogoDivmacDark from "../Icons/Logo-Divmac-Dark";
-import Image from "next/image";
 import LogoDivmacLight from "../Icons/Logo-Divmac-Light";
 
 const Header = (props: {

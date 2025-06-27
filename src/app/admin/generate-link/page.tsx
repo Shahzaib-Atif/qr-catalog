@@ -16,14 +16,11 @@ export default function GenerateLink() {
 }
 
 async function ServerGenerateLinkPage() {
-  try {
-    const user = await getUser();
-    if (!user || !user.isAdmin) {
-      return redirect("/auth/signin");
-    }
-    return <GenerateLinkPage />;
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    return redirect("/auth/signin");
+  const user = await getUser();
+  if (!user || !user.isAdmin) {
+    throw new Error(
+      "Only an admin can access this page. Please contact the website administrator.",
+    );
   }
+  return <GenerateLinkPage />;
 }
