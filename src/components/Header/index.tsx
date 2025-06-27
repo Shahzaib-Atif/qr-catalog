@@ -61,12 +61,12 @@ const Header = (props: {
 
           {/* LOGO (switch logo based on light/dark theme) */}
           <div className="ml-2 block h-auto flex-shrink-0">
-            <a href="/" className="block dark:hidden">
+            <div className="block dark:hidden">
               <LogoDivmacLight />
-            </a>
-            <a href="/" className="hidden dark:block">
+            </div>
+            <div className="hidden dark:block">
               <LogoDivmacDark />
-            </a>
+            </div>
           </div>
         </div>
 
