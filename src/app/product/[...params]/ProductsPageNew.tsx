@@ -33,7 +33,7 @@ export function ProductsPage({
                   readOnly
                   value={prodId}
                   type="text"
-                  className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-2 text-base text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary xsm:py-3 xsm:text-lg"
+                  className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-3 py-2 text-base text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary xsm:px-5 xsm:py-3 xsm:text-lg"
                 />
               </div>
 
@@ -45,9 +45,9 @@ export function ProductsPage({
                   readOnly
                   value={ownRef}
                   type="text"
-                  className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-2 text-base text-black outline-none transition 
-                  focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark 
-                  dark:bg-form-input dark:text-white dark:focus:border-primary xsm:py-3 xsm:text-lg"
+                  className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-3 py-2 text-base text-black outline-none transition focus:border-primary 
+                  active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input 
+                  dark:text-white dark:focus:border-primary xsm:px-5 xsm:py-3 xsm:text-lg"
                 />
               </div>
             </div>
@@ -60,7 +60,7 @@ export function ProductsPage({
                 readOnly
                 value={clientRef}
                 type="email"
-                className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-2 text-base text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary xsm:py-3 xsm:text-lg"
+                className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-3 py-2 text-base text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary xsm:px-5 xsm:py-3 xsm:text-lg"
               />
             </div>
 
