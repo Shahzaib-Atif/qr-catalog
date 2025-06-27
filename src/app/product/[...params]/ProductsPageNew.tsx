@@ -23,46 +23,48 @@ export function ProductsPage({
           </h3>
         </div>
         <form>
-          <div className="p-6.5">
-            <div className="mb-4.5 flex flex-col gap-6 xsm:flex-row">
+          <div className="px-6.5 py-4.5 sm:py-6.5">
+            <div className="mb-4.5 flex flex-col gap-4 xsm:flex-row xsm:gap-6">
               <div className="w-full xl:w-1/2">
-                <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+                <label className="mb-2 block text-sm font-medium text-black dark:text-white xsm:mb-3 xsm:text-base">
                   Product ID
                 </label>
                 <input
                   readOnly
                   value={prodId}
                   type="text"
-                  className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                  className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-2 text-base text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary xsm:py-3 xsm:text-lg"
                 />
               </div>
 
               <div className="w-full xl:w-1/2">
-                <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+                <label className="mb-2 block text-sm font-medium text-black dark:text-white xsm:mb-3 xsm:text-base">
                   Ref
                 </label>
                 <input
                   readOnly
                   value={ownRef}
                   type="text"
-                  className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                  className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-2 text-base text-black outline-none transition 
+                  focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark 
+                  dark:bg-form-input dark:text-white dark:focus:border-primary xsm:py-3 xsm:text-lg"
                 />
               </div>
             </div>
 
-            <div className="mb-8.5">
-              <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+            <div className="mb-5.5 xsm:mb-8.5">
+              <label className="mb-2 block text-sm font-medium text-black dark:text-white xsm:mb-3 xsm:text-base">
                 Client Ref
               </label>
               <input
                 readOnly
                 value={clientRef}
                 type="email"
-                className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-2 text-base text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary xsm:py-3 xsm:text-lg"
               />
             </div>
 
-            <div className="mb-4.5">
+            <div className="mb-4.5 xsm:mb-2.5">
               {/* Image */}
               <ImageWithSkeleton
                 imgLoaded={imgLoaded}
@@ -79,7 +81,7 @@ export function ProductsPage({
               }
               rel="noopener noreferrer"
               target="_blank"
-              className="text-md flex flex-row justify-center gap-2 font-medium text-black dark:text-white"
+              className="font-small flex flex-row items-center justify-center gap-2 text-sm text-black dark:text-white xsm:text-lg xsm:font-medium"
             >
               <ArrowUpRight />
               <h4> Open Technical documents </h4>
