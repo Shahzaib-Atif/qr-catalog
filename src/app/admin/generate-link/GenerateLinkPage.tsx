@@ -64,7 +64,7 @@ export function GenerateLinkPage() {
           <div className="flex flex-col gap-5 p-6.5">
             {/* Product Id */}
             <div>
-              <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+              <label className="mb-2 block text-sm font-medium text-black dark:text-white xsm:mb-3">
                 Product ID
               </label>
               <input
@@ -77,7 +77,7 @@ export function GenerateLinkPage() {
 
             {/* Ref */}
             <div>
-              <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+              <label className="mb-2 block text-sm font-medium text-black dark:text-white xsm:mb-3">
                 Ref
               </label>
               <input
@@ -90,7 +90,7 @@ export function GenerateLinkPage() {
 
             {/* Client Ref */}
             <div>
-              <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+              <label className="mb-2 block text-sm font-medium text-black dark:text-white xsm:mb-3">
                 Client Ref
               </label>
               <input
@@ -103,7 +103,7 @@ export function GenerateLinkPage() {
 
             {/* Sharepoint folder Url */}
             <div>
-              <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+              <label className="mb-2 block text-sm font-medium text-black dark:text-white xsm:mb-3">
                 Sharepoint folder Url
               </label>
               <input
@@ -116,7 +116,7 @@ export function GenerateLinkPage() {
 
             {/* Show generated Link */}
             <div>
-              <label className="font-small text-xsm mb-3 block text-black dark:text-white">
+              <label className="font-small text-xsm mb-2 block text-black dark:text-white xsm:mb-3">
                 Generated Link
               </label>
               <div className="relative">
