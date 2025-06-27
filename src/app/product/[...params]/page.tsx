@@ -57,32 +57,45 @@ async function ServerProductsPage({
     throw new Error("Missing Ref in URL");
   }
 
-  // const url =
-  //   "https://pintobrasilsgps.sharepoint.com/sites/AreadeClienteDivmac/Documentos%20Partilhados/Forms/AllItems.aspx?id=%2Fsites%2FAreadeClienteDivmac%2FDocumentos%20Partilhados%2FBosch%20Chassis%20Systems%20India&viewid=e4ef741d%2De31b%2D47d6%2Da553%2D7105f160bc7a";
-  // const encodedFolderUrl = encodeURIComponent(btoa(url));
-  const decodedclientRef = atob(decodeURIComponent(clientRef || ""));
-  const decodedFolderUrl = atob(decodeURIComponent(folderUrl || ""));
+  const { decodedclientRef, decodedFolderUrl } = decodeParams(
+    clientRef || "undefined",
+    folderUrl || "undefined",
+  );
 
-  // console.log("Original Folder URL:", url);
-  // console.log("Encoded Folder URL:", encodedFolderUrl);
-  // console.log("Decoded Folder URL:", decodedFolderUrl);
-
-  const product = await getProductBySlug(prodId);
-  if (!product) {
-    throw new Error(`No product found with the name '${prodId}'`);
-  }
-
-  const signedUrl = product.image_url
-    ? await getImageUrl(product.image_url)
-    : "";
+  const imageUrl = process.env.NEXT_PUBLIC_IMAGE_SOURCE + `/${prodId}`;
+  console.log("NEXT_PUBLIC_IMAGE_URL: ", process.env.NEXT_PUBLIC_IMAGE_SOURCE);
 
   return (
     <ProductsPage
-      prodId={product.name}
-      ownRef={ownRef || product.description}
+      prodId={prodId}
+      ownRef={ownRef}
       clientRef={decodedclientRef || ""}
-      imageSrc={signedUrl || undefined}
+      imageSrc={imageUrl}
       folderUrl={decodedFolderUrl}
     />
   );
+}
+
+function decodeParams(clientRef: string, folderUrl: string) {
+  // Encoding example => const encodedFolderUrl = encodeURIComponent(btoa(url));
+
+  // declare clientRef and folderUrl
+  let decodedclientRef = clientRef;
+  let decodedFolderUrl = folderUrl;
+
+  // Decode clientRef
+  try {
+    decodedclientRef = atob(decodeURIComponent(clientRef || ""));
+  } catch (e) {
+    console.error(`Error decoding clientRef '${clientRef}'. `, e);
+  }
+
+  // Decode folderUrl
+  try {
+    decodedFolderUrl = atob(decodeURIComponent(folderUrl || ""));
+  } catch (e) {
+    console.error(`Error decoding folderUrl '${folderUrl}'. `, e);
+  }
+
+  return { decodedclientRef, decodedFolderUrl };
 }
