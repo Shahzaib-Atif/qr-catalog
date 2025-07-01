@@ -1,5 +1,5 @@
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import { metadataObj } from "@/utils/metadataObj";
+import { metadataObj } from "@/utils/common/metadataObj";
 import { Suspense } from "react";
 import Loader from "@/components/common/Loader";
 import UsersPage from "./UsersPage";

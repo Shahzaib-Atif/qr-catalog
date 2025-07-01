@@ -3,8 +3,9 @@
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { ProductsPage } from "@/app/product/[...params]/ProductsPageNew";
 import { Suspense } from "react";
-import { metadataObj } from "@/utils/metadataObj";
+import { metadataObj } from "@/utils/common/metadataObj";
 import Loader from "@/components/common/Loader";
+import { generateJwtToken } from "@/utils/common/generateJwtToken";
 
 // Optional
 export const metadata = metadataObj;
@@ -82,14 +83,14 @@ function decodeParams(clientRef: string, folderUrl: string) {
   try {
     decodedclientRef = atob(decodeURIComponent(clientRef || ""));
   } catch (e) {
-    console.error(`Error decoding clientRef '${clientRef}'. `, e);
+    console.error(`Error decoding clientRef '${clientRef}'. `);
   }
 
   // Decode folderUrl
   try {
     decodedFolderUrl = atob(decodeURIComponent(folderUrl || ""));
   } catch (e) {
-    console.error(`Error decoding folderUrl '${folderUrl}'. `, e);
+    console.error(`Error decoding folderUrl '${folderUrl}'. `);
   }
 
   return { decodedclientRef, decodedFolderUrl };
@@ -106,6 +107,11 @@ function getImageUrl(ownRef: string) {
     );
   }
 
-  const imageUrl = process.env.NEXT_PUBLIC_IMAGE_SOURCE + `/${codivmacId}`;
+  const jwtToken = generateJwtToken("anyvalue");
+  const imageUrl =
+    process.env.NEXT_PUBLIC_LOCAL_SOURCE +
+    "/images" +
+    `/${codivmacId}` +
+    `?token=${jwtToken}`;
   return imageUrl;
 }

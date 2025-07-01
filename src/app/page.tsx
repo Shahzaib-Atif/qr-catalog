@@ -1,4 +1,4 @@
-import { metadataObj } from "@/utils/metadataObj";
+import { metadataObj } from "@/utils/common/metadataObj";
 import { redirect } from "next/navigation";
 
 export const metadata = metadataObj;
