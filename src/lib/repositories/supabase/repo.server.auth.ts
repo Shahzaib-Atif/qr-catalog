@@ -3,7 +3,6 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from 'next/headers';
 import { IAuthRepository } from '@/lib/domain/interfaces';
 import { Database } from "@/types/supabase";
-import { GetUserDTO } from "@/lib/dtos/user.dto";
 import { listUsers } from "@/utils/supabase/listUsers";
 
 export class SupabaseAuthRepository implements IAuthRepository {

@@ -5,6 +5,7 @@ import Loader from "@/components/common/Loader";
 import UsersPage from "./UsersPage";
 import { get } from "http";
 import { getAllUsers } from "@/lib/actions/actions.server.auth";
+import { generateJwtToken } from "@/utils/common/generateJwtToken";
 
 export const metadata = metadataObj;
 
@@ -20,6 +21,14 @@ export default async function Users() {
 }
 
 async function ServerUsersPage() {
+  // const res = await fetch(
+  //   process.env.NEXT_PUBLIC_LOCAL_SOURCE +
+  //     "/localdb/data" +
+  //     `?token=${generateJwtToken("any")}`,
+  // );
+  // const result = await res.json();
+  // console.log("result: ", result);
+
   const users = await getAllUsers();
   return <UsersPage users={users} />;
 }
