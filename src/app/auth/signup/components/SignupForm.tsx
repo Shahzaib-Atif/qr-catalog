@@ -10,7 +10,7 @@ export default function SignupForm(props: {
   handleSubmit: (event: any) => Promise<void>;
   loading: boolean;
   success: string;
-  error: string
+  error: string;
 }) {
   const { handleSubmit, loading, success, error } = props;
 
@@ -100,9 +100,13 @@ export default function SignupForm(props: {
         </p>
       </div>
 
-      {loading && <SpinnerOne />}
-      {!error && success && <SuccessAlert msg={success}/>}
-      {error && <ErrorAlert error={error} />}
+      {loading ? (
+        <SpinnerOne />
+      ) : error ? (
+        <ErrorAlert error={error} />
+      ) : success ? (
+        <SuccessAlert msg={success} />
+      ) : null}
     </form>
   );
 }

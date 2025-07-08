@@ -24,7 +24,7 @@ export default function Signup() {
       startTransition(() => {
         signUp(email, username, password)
           .then((res) => {
-            res?.success ? setSuccess(res.message) : setError(res.message);
+            res?.success ? setSuccess(res.message) : setError(res?.message);
           })
           .catch((err) => {
             console.error(err);
@@ -33,8 +33,6 @@ export default function Signup() {
       });
     } catch (error: any) {
       console.log("error: ", error);
-    } finally {
-      // setLoading(false);
     }
   };
 

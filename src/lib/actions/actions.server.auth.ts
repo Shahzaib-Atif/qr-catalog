@@ -1,5 +1,4 @@
 "use server"
-import { IAuthRepository } from "@/lib/domain/interfaces"
 import { SupabaseAuthRepository } from "@/lib/repositories/supabase/repo.server.auth";
 import { GetUserDTO, GetUserSchema } from "../dtos/user.dto";
 import { PrismaAuthRepository } from "../repositories/prisma/repo.prisma.auth";
