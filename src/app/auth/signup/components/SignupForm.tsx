@@ -4,13 +4,15 @@ import EmailIcon from "@/components/Icons/EmailIcon";
 import PasswordIcon from "@/components/Icons/PasswordIcon";
 import UserIcon from "@/components/Icons/UserIcon";
 import SpinnerOne from "@/components/Spinners/SpinnerOne";
+import SuccessAlert from "@/components/SuccessAlert";
 
 export default function SignupForm(props: {
   handleSubmit: (event: any) => Promise<void>;
   loading: boolean;
-  error: string;
+  success: string;
+  error: string
 }) {
-  const { handleSubmit, loading, error } = props;
+  const { handleSubmit, loading, success, error } = props;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -99,6 +101,7 @@ export default function SignupForm(props: {
       </div>
 
       {loading && <SpinnerOne />}
+      {!error && success && <SuccessAlert msg={success}/>}
       {error && <ErrorAlert error={error} />}
     </form>
   );

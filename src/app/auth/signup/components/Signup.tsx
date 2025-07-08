@@ -1,34 +1,40 @@
-"use client"
-import { signUp } from "@/lib/actions/actions.client.auth";
-import { useState } from "react";
+"use client";
+import { useState, useTransition } from "react";
 import SideLayout from "./SideLayout";
 import SignupForm from "./SignupForm";
+import { signUp } from "@/lib/services/user.service";
 
 export default function Signup() {
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    
-    // get form data 
+    setSuccess("");
+    setError("");
+
+    // get form data
     const data = new FormData(event.currentTarget);
     const username = data.get("username") as string;
     const email = data.get("email") as string;
     const password = data.get("password") as string;
 
-    setError("");
-    setLoading(true);
     try {
-      const actionResponse = await signUp(email, username, password);
-      console.log("actionResponse: ", actionResponse);
-      if (actionResponse.error) {
-        setError(actionResponse.error);
-      }
+      startTransition(() => {
+        signUp(email, username, password)
+          .then((res) => {
+            res?.success ? setSuccess(res.message) : setError(res.message);
+          })
+          .catch((err) => {
+            console.error(err);
+            setError(err?.message || "Something went wrong.");
+          });
+      });
     } catch (error: any) {
-      setError(error.message || "unknown error");
+      console.log("error: ", error);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
@@ -44,7 +50,12 @@ export default function Signup() {
             <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
               Sign Up to Divmac Web App
             </h2>
-            <SignupForm handleSubmit={handleSubmit} loading={loading} error={error} />
+            <SignupForm
+              handleSubmit={handleSubmit}
+              loading={isPending}
+              success={success}
+              error={error}
+            />
           </div>
         </div>
       </div>
