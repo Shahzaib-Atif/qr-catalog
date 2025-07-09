@@ -28,7 +28,7 @@ export default function Signup() {
           })
           .catch((err) => {
             console.error(err);
-            setError(err?.message || "Something went wrong.");
+            setError(err?.message || "Something went wrong!");
           });
       });
     } catch (error: any) {

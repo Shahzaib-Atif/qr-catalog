@@ -13,6 +13,6 @@ export interface IAuthRepository {
   signUp(email: string, username: string, password: string): Promise<any>;
   signIn(email: string, password: string): Promise<any>;
   signOut(): void;
-  getUser(): Promise<any>;
+  getUser(emailOrUsername: string): Promise<any>;
   getAllUsers(): Promise<any[]>;
 }

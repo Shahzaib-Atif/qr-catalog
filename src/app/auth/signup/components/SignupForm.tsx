@@ -19,7 +19,7 @@ export default function SignupForm(props: {
       {/* Name */}
       <div className="mb-4">
         <label className="mb-2.5 block font-medium text-black dark:text-white">
-          Name
+          Username
         </label>
         <div className="relative">
           <input

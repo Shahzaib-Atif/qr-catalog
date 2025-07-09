@@ -16,7 +16,7 @@ export default function SignInForm(props: {
       {/* Username or Email */}
       <div className="mb-4">
         <label className="mb-2.5 block font-medium text-black dark:text-white">
-          Email
+          Username / Email
         </label>
         <div className="relative">
           <input
@@ -24,7 +24,7 @@ export default function SignInForm(props: {
             name="email"
             required
             autoComplete="username"
-            placeholder="Enter your email"
+            placeholder="Enter your username or email"
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
           />
 
@@ -45,7 +45,7 @@ export default function SignInForm(props: {
             name="password"
             required
             autoComplete="current-password"
-            placeholder="6+ Characters, 1 Capital letter"
+            placeholder="Enter your password"
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
           />
 
@@ -76,8 +76,7 @@ export default function SignInForm(props: {
         </p>
       </div>
 
-      {loading && <SpinnerOne />}
-      {error && <ErrorAlert error={error} />}
+      {loading ? <SpinnerOne /> : error ? <ErrorAlert error={error} /> : null}
     </form>
   );
 }
