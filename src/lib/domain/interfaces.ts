@@ -1,7 +1,6 @@
 // lib/interfaces/product-repository.ts
 
-import { ActionResponse, Product } from "@/lib/domain/models";
-import { GetUserDTO } from "../dtos/user.dto";
+import { Product } from "@/lib/domain/models";
 
 export interface IProductRepository {
   getImageUrl(image_url: string): Promise<string | null>;

@@ -56,7 +56,7 @@ export async function signIn(usernameOrEmail: string, password: string) {
         if (parsedUser.success) {
             const { name, email, isAdmin } = parsedUser.data;
 
-            // Set cookie (simplified session, e.g., user ID)
+            // Set cookie (simplified session)
             (await
                 cookies()).set("session", JSON.stringify({ name, email, isAdmin }), {
                     httpOnly: true,
@@ -79,4 +79,8 @@ export async function signIn(usernameOrEmail: string, password: string) {
 
         return { success: false, message: errorMsg };
     }
+}
+
+export async function signOut() {
+    (await cookies()).delete("session")
 }

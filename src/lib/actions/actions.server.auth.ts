@@ -15,7 +15,7 @@ export async function signIn(email: string, password: string) {
 }
 
 export async function getUser(): Promise<GetUserDTO> {
-    const { user } = await authRepo.getUser();
+    const { user } = await authRepo.getUser("");
 
     // Create userDto
     const userDto = createUserDto(user);
