@@ -4,15 +4,27 @@ import Loader from "@/components/common/Loader";
 import Check from "@/components/Icons/Check";
 import Copy from "@/components/Icons/Copy";
 import Refresh from "@/components/Icons/Refresh";
-import { useState } from "react";
+import { useReducer, useState } from "react";
+
+const initialState = {
+  productId: "",
+  ownRef: "",
+  clientRef: "",
+  sharepointUrl: "",
+}
+
+type formDataStateType = typeof initialState;
+type formDataActionType = { name: string; value: string; }
+
+function formReducer(state: formDataStateType, action: formDataActionType) {
+  return {
+    ...state,
+    [action.name]: action.value
+  }
+}
 
 export function GenerateLinkPage() {
-  const [formData, setFormData] = useState({
-    productId: "",
-    ownRef: "",
-    clientRef: "",
-    sharepointUrl: "",
-  });
+  const [formData, dispatch] = useReducer(formReducer, initialState);
   const [finalUrl, setFinalUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -27,19 +39,17 @@ export function GenerateLinkPage() {
     const { name, value } = e.target;
 
     if (name === "sharepointUrl" || name === "clientRef") {
-      // Encode SharepointUrl and clientRef
       const encodedValue = encodeURIComponent(btoa(value));
-      setFormData((prev: any) => ({ ...prev, [name]: encodedValue }));
+      dispatch({ name, value: encodedValue }) // use encoded value
     } else {
-      // Update other fields normally
-      setFormData((prev: any) => ({ ...prev, [name]: value }));
+      dispatch({ name, value }) // use normal value
     }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // prevents form reset
-
     setLoading(true); // Show loader
+
     setTimeout(() => {
       setLoading(false); // Hide loader after 0.5 second
     }, 500);
@@ -52,7 +62,7 @@ export function GenerateLinkPage() {
 
   return (
     <div className="mx-auto flex grid max-w-2xl grid-cols-1 flex-col items-center gap-9">
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="border-b border-stroke px-6.5 py-4 dark:border-strokedark">
           <h3 className="font-medium text-black dark:text-white">
@@ -139,8 +149,9 @@ export function GenerateLinkPage() {
             </div>
 
             {/* Button to generate link */}
-            <div>
+            <div className={loading ? 'opacity-30' : 'opacity-100'}>
               <button
+                disabled={loading}
                 type="submit"
                 value="Generate New Link"
                 className="flex w-full cursor-pointer flex-row justify-center gap-2 rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"

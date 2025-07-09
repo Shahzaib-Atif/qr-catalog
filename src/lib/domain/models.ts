@@ -10,3 +10,9 @@ export type ActionResponse = {
     data: any;
     error: string
 }
+
+export type User = {
+    username: string;
+    email: string;
+    password?: string
+}

@@ -4,20 +4,22 @@ import EmailIcon from "@/components/Icons/EmailIcon";
 import PasswordIcon from "@/components/Icons/PasswordIcon";
 import UserIcon from "@/components/Icons/UserIcon";
 import SpinnerOne from "@/components/Spinners/SpinnerOne";
+import SuccessAlert from "@/components/SuccessAlert";
 
 export default function SignupForm(props: {
   handleSubmit: (event: any) => Promise<void>;
   loading: boolean;
+  success: string;
   error: string;
 }) {
-  const { handleSubmit, loading, error } = props;
+  const { handleSubmit, loading, success, error } = props;
 
   return (
     <form onSubmit={handleSubmit}>
       {/* Name */}
       <div className="mb-4">
         <label className="mb-2.5 block font-medium text-black dark:text-white">
-          Name
+          Username
         </label>
         <div className="relative">
           <input
@@ -98,8 +100,13 @@ export default function SignupForm(props: {
         </p>
       </div>
 
-      {loading && <SpinnerOne />}
-      {error && <ErrorAlert error={error} />}
+      {loading ? (
+        <SpinnerOne />
+      ) : error ? (
+        <ErrorAlert error={error} />
+      ) : success ? (
+        <SuccessAlert msg={success} />
+      ) : null}
     </form>
   );
 }

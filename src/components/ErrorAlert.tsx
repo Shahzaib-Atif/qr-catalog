@@ -7,8 +7,8 @@ export default function ErrorAlert({ error }: Props) {
     <div className="mb-3 flex w-full items-center border-l-6 border-[#F87171] bg-[#F87171] bg-opacity-[15%] p-4 py-3 shadow-md dark:bg-[#1B1B24] dark:bg-opacity-30">
       <div className="mr-4 flex h-7 w-full max-w-[36px] items-center justify-center rounded-lg bg-[#F87171]">
         <svg
-          width="10"
-          height="10"
+          width="13"
+          height="13"
           viewBox="0 0 13 13"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

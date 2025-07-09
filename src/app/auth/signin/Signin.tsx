@@ -1,36 +1,41 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import SideLayout from "../signup/components/SideLayout";
-// import { getUser, signIn } from "@/lib/actions/authActions";
-import { signIn } from "@/lib/actions/actions.client.auth";
 import SignInForm from "./SignInForm";
-import { redirect } from "next/navigation";
+import { signIn } from "@/lib/services/user.service";
+import { useRouter } from "next/navigation";
 
 const SignIn: React.FC = () => {
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [, setSuccess] = useState("");
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter()
 
   const handleSubmit = async (formdata: FormData) => {
+    setSuccess("");
+    setError("");
+
     // get form data
     const email = formdata.get("email") as string;
     const password = formdata.get("password") as string;
 
-    // start loading
-    let loginFailed = false;
-    setError("");
-    setLoading(true);
-
     try {
-      const actionResponse = await signIn(email, password);
-      if (actionResponse.error) {
-        throw actionResponse.error;
-      }
+      startTransition(() => {
+        signIn(email, password)
+          .then((res) => {
+            if (res?.success === false) setError(res?.message);
+            else {
+              console.log('login success!');
+              router.push('/')
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            setError(err?.message || "Something went wrong!");
+          });
+      });
     } catch (error: any) {
-      setError(error.message || error.toString());
-      loginFailed = true;
-    } finally {
-      setLoading(false);
-      if (!loginFailed) redirect("/");
+      console.log("error: ", error);
     }
   };
 
@@ -48,7 +53,7 @@ const SignIn: React.FC = () => {
 
             <SignInForm
               handleSubmit={handleSubmit}
-              loading={loading}
+              loading={isPending}
               error={error}
             />
           </div>

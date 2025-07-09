@@ -1,9 +1,10 @@
 "use server"
-import { IAuthRepository } from "@/lib/domain/interfaces"
 import { SupabaseAuthRepository } from "@/lib/repositories/supabase/repo.server.auth";
 import { GetUserDTO, GetUserSchema } from "../dtos/user.dto";
+import { PrismaAuthRepository } from "../repositories/prisma/repo.prisma.auth";
 
-const authRepo: IAuthRepository = new SupabaseAuthRepository();
+// const authRepo: IAuthRepository = new SupabaseAuthRepository();
+const authRepo = new PrismaAuthRepository();
 
 export async function signUp(email: string, username: string, password: string) {
     return await authRepo.signUp(email, username, password);
@@ -14,7 +15,7 @@ export async function signIn(email: string, password: string) {
 }
 
 export async function getUser(): Promise<GetUserDTO> {
-    const { user } = await authRepo.getUser();
+    const { user } = await authRepo.getUser("");
 
     // Create userDto
     const userDto = createUserDto(user);
