@@ -40,5 +40,10 @@ jobs:
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           NEXT_PUBLIC_IMAGE_SOURCE: ${{ secrets.NEXT_PUBLIC_IMAGE_SOURCE }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          USER: ${{ secrets.USER }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          SERVER: ${{ secrets.SERVER }}
+          DATABASE: ${{ secrets.DATABASE }}
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
