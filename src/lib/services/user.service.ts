@@ -1,5 +1,6 @@
 "use server";
 import bcrypt from "bcrypt";
+import { cookies } from "next/headers";
 import { IAuthRepository } from "../domain/interfaces";
 import { GetUserSchema } from "../dtos/user.dto";
 import { PrismaAuthRepository } from "../repositories/prisma/repo.prisma.auth";
@@ -52,9 +53,20 @@ export async function signIn(usernameOrEmail: string, password: string) {
             isAdmin: user.isAdmin
         });
 
-        if (parsedUser.success)
+        if (parsedUser.success) {
+            const { name, email, isAdmin } = parsedUser.data;
+
+            // Set cookie (simplified session, e.g., user ID)
+            (await
+                cookies()).set("session", JSON.stringify({ name, email, isAdmin }), {
+                    httpOnly: true,
+                    path: "/",
+                    secure: true,
+                    sameSite: "lax",
+                    maxAge: 60 * 60 * 24 * 7, // 1 week
+                })
             return { success: true, message: "user logged in successfully!" };
-        else
+        } else
             return { success: false, message: "An error occured while parsing the data!" };
 
     } catch (error: any) {
