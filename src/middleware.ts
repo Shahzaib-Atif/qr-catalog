@@ -8,6 +8,8 @@ export const config = {
 
 export function middleware(req: NextRequest) {
     const session = req.cookies.get("session");
+    console.log('session cookie: ', session);
+
 
     if (!session) {
         const loginUrl = new URL('/auth/signin', req.nextUrl.origin);
