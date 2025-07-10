@@ -1,15 +1,18 @@
 "use client";
 import React, { useState, useTransition } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import SideLayout from "../signup/components/SideLayout";
 import SignInForm from "./SignInForm";
 import { signIn } from "@/lib/services/user.service";
-import { useRouter } from "next/navigation";
 
 const SignIn: React.FC = () => {
   const [error, setError] = useState("");
   const [, setSuccess] = useState("");
   const [isPending, startTransition] = useTransition();
+
   const router = useRouter()
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get("redirect") || "/";
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -28,7 +31,7 @@ const SignIn: React.FC = () => {
             if (res?.success === false) setError(res?.message);
             else {
               console.log('login success!');
-              router.push('/')
+              router.push(redirectPath) // dynamic redirect
             }
           })
           .catch((err) => {
