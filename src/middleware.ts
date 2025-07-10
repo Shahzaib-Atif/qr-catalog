@@ -12,6 +12,7 @@ export function middleware(req: NextRequest) {
     if (!session) {
         const loginUrl = new URL('/auth/signin', req.nextUrl.origin);
         loginUrl.searchParams.set('redirect', req.nextUrl.pathname + req.nextUrl.search);
+        loginUrl.searchParams.set('error', 'unauthorized');
         return NextResponse.redirect(loginUrl);
     }
 
