@@ -1,8 +1,11 @@
 import ErrorAlert from "@/components/ErrorAlert";
 import EmailIcon from "@/components/Icons/EmailIcon";
+import EyeIcon from "@/components/Icons/EyeIcon";
+import EyeSlashIcon from "@/components/Icons/EyeSlashIcon";
 import PasswordIcon from "@/components/Icons/PasswordIcon";
 import SpinnerOne from "@/components/Spinners/SpinnerOne";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function SignInForm(props: {
   handleSubmit: (event: any) => Promise<void>;
@@ -10,6 +13,7 @@ export default function SignInForm(props: {
   error: string;
 }) {
   const { handleSubmit, loading, error } = props;
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -41,17 +45,24 @@ export default function SignInForm(props: {
         </label>
         <div className="relative">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             required
             autoComplete="current-password"
             placeholder="Enter your password"
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
           />
-
-          <span className="absolute right-4 top-4">
-            <PasswordIcon />
-          </span>
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-4 top-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          >
+            {showPassword ? (
+              <EyeSlashIcon />
+            ) : (
+              <EyeIcon />
+            )}
+          </button>
         </div>
       </div>
 
