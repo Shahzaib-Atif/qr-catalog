@@ -98,7 +98,7 @@ async function setCookie() {
         cookies()).set("session", JSON.stringify({ name: 'admin', isAdmin: true }), {
             httpOnly: true,
             path: "/",
-            secure: true,
+            secure: false,
             sameSite: "lax",
             maxAge: 60 * 60 * 24 * 7, // 1 week
         })
