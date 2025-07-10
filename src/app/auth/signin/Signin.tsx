@@ -58,7 +58,9 @@ const SignIn: React.FC = () => {
         return;
       }
 
-      router.push(redirectPath);
+      // router.push(redirectPath);
+      window.location.href = redirectPath;
+
     } catch (error: any) {
       console.log("error: ", error);
     }
