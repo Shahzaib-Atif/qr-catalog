@@ -12,37 +12,13 @@ jobs:
         with:
           node-version: 20.11.1
 
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-
-      - uses: actions/cache@v4
-        with:
-          path: ~/.yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Install dependencies with Yarn
+      - name: Install dependencies
         run: yarn install
 
       - name: Generate Prisma Client
         run: yarn prisma generate
 
-      - name: Apply Prisma Migrations
-        run: yarn prisma migrate deploy
-
       - name: Build Next.js app
         run: yarn build
-        env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          NEXT_PUBLIC_IMAGE_SOURCE: ${{ secrets.NEXT_PUBLIC_IMAGE_SOURCE }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          USER: ${{ secrets.USER }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          SERVER: ${{ secrets.SERVER }}
-          DATABASE: ${{ secrets.DATABASE }}
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
