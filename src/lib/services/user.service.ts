@@ -35,27 +35,30 @@ export async function signUp(
     }
 }
 
-export async function signIn(usernameOrEmail: string, password: string) {
+export async function signIn(username: string, password: string) {
     try {
-        // make sure email or username are present
-        if (!usernameOrEmail) { throw ("invalid username or email") }
+        // validate user
+        if (!username) { throw ("invalid username or email") }
+        const envUser = process.env.DEFAULT_ADMIN_USERNAME;
+        if (!envUser) { throw ("Unable to read from env!") }
+        const isUserValid = envUser?.toLowerCase() === username?.toLowerCase();
+        if (!isUserValid) { throw ("User not found!"); }
 
-        // get user from repo (case insensitive)
-        // const user = await authRepo.getUser(usernameOrEmail.toLowerCase());
-        // if (!user) { throw ("User not found!"); }
-
-        // check password (use env password for now)
-        const envPwd = process.env.AMDIN_PWD;
-        console.log('PWD: ', process.env.AMDIN_PWD);
+        // validate password
+        const envPwd = process.env.DEFAULT_ADMIN_PWD;
         if (!envPwd) { throw ("Unable to read from env!") }
-
-        // check if password is valid
-        const isValid = await bcrypt.compare(password, envPwd)
-        if (!isValid) { throw ("Invalid credentials!"); }
+        const isPassValid = envPwd === password;
+        if (!isPassValid) { throw ("Invalid password!"); }
 
         // set cookie and return success message
         await setCookie();
         return { success: true, message: "user logged in successfully!" };
+
+
+        // not fetching from repo for the timebeing
+        // get user from repo (case insensitive)
+        // const user = await authRepo.getUser(usernameOrEmail.toLowerCase());
+        // if (!user) { throw ("User not found!"); }
 
         // apply dto parsing
         // const parsedUser = GetUserSchema.safeParse({

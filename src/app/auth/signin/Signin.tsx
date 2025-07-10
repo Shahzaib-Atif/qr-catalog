@@ -11,13 +11,15 @@ const SignIn: React.FC = () => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter()
 
-  const handleSubmit = async (formdata: FormData) => {
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
     setSuccess("");
     setError("");
 
     // get form data
-    const email = formdata.get("email") as string;
-    const password = formdata.get("password") as string;
+    const data = new FormData(event.currentTarget);
+    const email = data.get("email") as string;
+    const password = data.get("password") as string;
 
     try {
       startTransition(() => {
