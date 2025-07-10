@@ -45,22 +45,20 @@ const SignIn: React.FC = () => {
     const password = data.get("password") as string;
 
     try {
-      startTransition(() => {
-        signIn(email, password)
-          .then((res) => {
-            if (res?.success === false) setError(res?.message);
-            else {
-              console.log('login success!');
-              router.refresh();
-              router.push(redirectPath) // dynamic redirect
-              // window.location.href = redirectPath;
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-            setError(err?.message || "Something went wrong!");
-          });
-      });
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: email, password }),
+      })
+
+      const result = await res.json();
+
+      if (!res.ok || result.success === false) {
+        setError(result.message || "Something went wrong");
+        return;
+      }
+
+      router.push(redirectPath);
     } catch (error: any) {
       console.log("error: ", error);
     }
