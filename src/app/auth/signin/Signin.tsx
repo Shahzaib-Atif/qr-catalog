@@ -51,8 +51,9 @@ const SignIn: React.FC = () => {
             if (res?.success === false) setError(res?.message);
             else {
               console.log('login success!');
-              // router.push(redirectPath) // dynamic redirect
-              window.location.href = redirectPath;
+              router.refresh();
+              router.push(redirectPath) // dynamic redirect
+              // window.location.href = redirectPath;
             }
           })
           .catch((err) => {
