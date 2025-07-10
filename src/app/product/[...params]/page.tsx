@@ -17,7 +17,7 @@ type Props = {
 // Server-side component receives `params` automatically
 export default async function ProductPage({ params }: Props) {
   const resolvedParams = await params;
-  const [prodId, ownRef, clientRef, folderUrl] = resolvedParams?.params ?? [];
+  const [prodId, ownRef, clientRef] = resolvedParams?.params ?? [];
 
   return (
     <DefaultLayout>
@@ -26,7 +26,6 @@ export default async function ProductPage({ params }: Props) {
           prodId={prodId}
           ownRef={ownRef}
           clientRef={clientRef}
-          folderUrl={folderUrl}
         />
       </Suspense>
     </DefaultLayout>
@@ -42,7 +41,9 @@ type ServerProductsPageProps = {
 
 async function ServerProductsPage(props: ServerProductsPageProps) {
   // Destructure the props
-  const { prodId, ownRef, clientRef, folderUrl } = props;
+  const { prodId, ownRef, clientRef } = props;
+
+  const folderUrl = await getSharepointUrl();
 
   // Validate the required parameters
   if (!prodId || prodId.length != 6) {
@@ -53,10 +54,7 @@ async function ServerProductsPage(props: ServerProductsPageProps) {
   }
 
   // Decode clientRef and folderUrl
-  const { decodedclientRef, decodedFolderUrl } = decodeParams(
-    clientRef || "undefined",
-    folderUrl || "undefined",
-  );
+  const decodedclientRef = decodeParams(clientRef || "");
 
   // Validate ownRef
   const imageUrl = getImageUrl(ownRef);
@@ -67,33 +65,25 @@ async function ServerProductsPage(props: ServerProductsPageProps) {
       ownRef={ownRef}
       clientRef={decodedclientRef || ""}
       imageSrc={imageUrl}
-      folderUrl={decodedFolderUrl}
+      folderUrl={folderUrl}
     />
   );
 }
 
-function decodeParams(clientRef: string, folderUrl: string) {
+function decodeParams(originalVal: string) {
   // Encoding example => const encodedFolderUrl = encodeURIComponent(btoa(url));
 
   // declare clientRef and folderUrl
-  let decodedclientRef = clientRef;
-  let decodedFolderUrl = folderUrl;
+  let decodedValue = originalVal;
 
   // Decode clientRef
   try {
-    decodedclientRef = atob(decodeURIComponent(clientRef || ""));
+    decodedValue = atob(decodeURIComponent(originalVal || ""));
   } catch (e) {
-    console.error(`Error decoding clientRef '${clientRef}'. `);
+    console.error(`Error decoding value '${originalVal}'. `);
   }
 
-  // Decode folderUrl
-  try {
-    decodedFolderUrl = atob(decodeURIComponent(folderUrl || ""));
-  } catch (e) {
-    console.error(`Error decoding folderUrl '${folderUrl}'. `);
-  }
-
-  return { decodedclientRef, decodedFolderUrl };
+  return decodedValue;
 }
 
 // Function to get the image URL based on codivmacId
@@ -114,4 +104,15 @@ function getImageUrl(ownRef: string) {
     `/${codivmacId}` +
     `?token=${jwtToken}`;
   return imageUrl;
+}
+
+async function getSharepointUrl(entidade = '00045') {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_LOCAL_SOURCE +
+    "/localdb/data" +
+    `/${entidade}` +
+    `?token=${generateJwtToken("any")}`,
+  );
+  const result = await res.json();
+  return result as string
 }

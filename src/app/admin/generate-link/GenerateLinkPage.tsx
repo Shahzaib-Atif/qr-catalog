@@ -1,6 +1,5 @@
 "use client";
 
-import Loader from "@/components/common/Loader";
 import Check from "@/components/Icons/Check";
 import Copy from "@/components/Icons/Copy";
 import Refresh from "@/components/Icons/Refresh";
@@ -54,9 +53,9 @@ export function GenerateLinkPage() {
       setLoading(false); // Hide loader after 0.5 second
     }, 500);
 
-    const { productId, ownRef, clientRef, sharepointUrl } = formData;
+    const { productId, ownRef, clientRef } = formData;
     setFinalUrl(
-      `${window.location.origin}/product/${productId}/${ownRef}/${clientRef}/${sharepointUrl}`,
+      `${window.location.origin}/product/${productId}/${ownRef}/${clientRef}`,
     );
   };
 
@@ -112,7 +111,7 @@ export function GenerateLinkPage() {
             </div>
 
             {/* Sharepoint folder Url */}
-            <div>
+            {/* <div>
               <label className="mb-2 block text-sm font-medium text-black dark:text-white xsm:mb-3">
                 Sharepoint folder Url
               </label>
@@ -122,7 +121,7 @@ export function GenerateLinkPage() {
                 onChange={handleChange}
                 className="w-full rounded border-[1.5px] border-stroke bg-bodydark1 px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
               />
-            </div>
+            </div> */}
 
             {/* Show generated Link */}
             <div>
