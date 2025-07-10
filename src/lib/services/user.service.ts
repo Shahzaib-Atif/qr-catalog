@@ -12,6 +12,8 @@ export async function signUp(
     username: string,
     password: string,
 ) {
+    return { success: false, message: 'Cannot signup new users! Please contact website administrator!' };
+
     try {
         // make sure email and username are present
         if (!email || !username) { throw ("invalid username or email") }
@@ -38,36 +40,37 @@ export async function signIn(usernameOrEmail: string, password: string) {
         // make sure email or username are present
         if (!usernameOrEmail) { throw ("invalid username or email") }
 
-        // get user (case insensitive)
-        const user = await authRepo.getUser(usernameOrEmail.toLowerCase());
-        if (!user) { throw ("User not found!"); }
+        // get user from repo (case insensitive)
+        // const user = await authRepo.getUser(usernameOrEmail.toLowerCase());
+        // if (!user) { throw ("User not found!"); }
 
-        // check password
-        const isValid = await bcrypt.compare(password, user.password)
+        // check password (use env password for now)
+        const envPwd = process.env.AMDIN_PWD;
+        console.log('PWD: ', process.env.AMDIN_PWD);
+        if (!envPwd) { throw ("Unable to read from env!") }
+
+        // check if password is valid
+        const isValid = await bcrypt.compare(password, envPwd)
         if (!isValid) { throw ("Invalid credentials!"); }
 
+        // set cookie and return success message
+        await setCookie();
+        return { success: true, message: "user logged in successfully!" };
+
         // apply dto parsing
-        const parsedUser = GetUserSchema.safeParse({
-            name: user.username,
-            email: user.email,
-            isAdmin: user.isAdmin
-        });
+        // const parsedUser = GetUserSchema.safeParse({
+        //     name: user.username,
+        //     email: user.email,
+        //     isAdmin: user.isAdmin
+        // });
 
-        if (parsedUser.success) {
-            const { name, email, isAdmin } = parsedUser.data;
+        // if (parsedUser.success) {
+        //     const { name, email, isAdmin } = parsedUser.data;
 
-            // Set cookie (simplified session)
-            (await
-                cookies()).set("session", JSON.stringify({ name, email, isAdmin }), {
-                    httpOnly: true,
-                    path: "/",
-                    secure: true,
-                    sameSite: "lax",
-                    maxAge: 60 * 60 * 24 * 7, // 1 week
-                })
-            return { success: true, message: "user logged in successfully!" };
-        } else
-            return { success: false, message: "An error occured while parsing the data!" };
+        //     await setCookie()
+        //     return { success: true, message: "user logged in successfully!" };
+        // } else
+        //     return { success: false, message: "An error occured while parsing the data!" };
 
     } catch (error: any) {
         console.log(error);
@@ -84,3 +87,17 @@ export async function signIn(usernameOrEmail: string, password: string) {
 export async function signOut() {
     (await cookies()).delete("session")
 }
+
+// set session cookie for admin user
+async function setCookie() {
+    // Set cookie (simplified session)
+    (await
+        cookies()).set("session", JSON.stringify({ name: 'admin', isAdmin: true }), {
+            httpOnly: true,
+            path: "/",
+            secure: true,
+            sameSite: "lax",
+            maxAge: 60 * 60 * 24 * 7, // 1 week
+        })
+}
+

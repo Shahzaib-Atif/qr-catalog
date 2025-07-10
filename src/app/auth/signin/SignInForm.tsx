@@ -67,14 +67,14 @@ export default function SignInForm(props: {
       </div>
 
       {/* dont have an account? */}
-      <div className="mb-6 mt-4 text-center">
+      {/* <div className="mb-6 mt-4 text-center">
         <p>
           Don’t have any account?{" "}
           <Link href="/auth/signup" className="text-primary">
             Sign Up
           </Link>
         </p>
-      </div>
+      </div> */}
 
       {loading ? <SpinnerOne /> : error ? <ErrorAlert error={error} /> : null}
     </form>
