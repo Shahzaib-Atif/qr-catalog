@@ -1,7 +1,7 @@
 // app/product/[...params]/page.tsx
 
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import { ProductsPage } from "@/app/product/[...params]/ProductsPageNew";
+import { ProductsPage } from "@/app/product/[...params]/ProductsPage";
 import { Suspense } from "react";
 import { metadataObj } from "@/utils/common/metadataObj";
 import Loader from "@/components/common/Loader";
@@ -106,13 +106,32 @@ function getImageUrl(ownRef: string) {
   return imageUrl;
 }
 
-async function getSharepointUrl(entidade = '00045') {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_LOCAL_SOURCE +
-    "/localdb/data" +
-    `/${entidade}` +
-    `?token=${generateJwtToken("any")}`,
-  );
-  const result = await res.json();
-  return result as string
+async function getSharepointUrl(entidade = '00045', timeout = 3000) {
+  // configure abort controller
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+  try {
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_LOCAL_SOURCE +
+      "/localdb/data" +
+      `/${entidade}` +
+      `?token=${generateJwtToken("any")}`,
+      { signal: controller.signal }
+    );
+
+    clearTimeout(timeoutId);
+
+    if (!res.ok) {
+      throw (`Failed to fetch SharePoint URL. Status: ${res.status}`);
+    }
+
+    const result = await res.json();
+    return result as string
+
+  } catch (error: any) {
+    console.error("Error fetching SharePoint URL:", error);
+    return "";
+  }
+
 }

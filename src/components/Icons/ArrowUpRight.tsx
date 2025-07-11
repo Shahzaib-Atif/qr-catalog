@@ -1,11 +1,11 @@
-export default function ArrowUpRight() {
+export default function ArrowUpRight({ width = 22, height = 22 }) {
   return (
     <svg
-      className="text-gray-800 h-5 w-5 dark:text-white xsm:h-6 xsm:w-6"
+      className="text-gray-800 h-4 w-4 dark:text-white xsm:h-5 xsm:w-5"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      width={width}
+      height={height}
       fill="none"
       viewBox="0 0 24 24"
     >
