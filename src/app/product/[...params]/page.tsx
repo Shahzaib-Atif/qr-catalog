@@ -43,7 +43,7 @@ async function ServerProductsPage(props: ServerProductsPageProps) {
   // Destructure the props
   const { prodId, ownRef, clientRef } = props;
 
-  const folderUrl = await getSharepointUrl();
+  const folderUrl = await getSharepointUrl(prodId || "xxx");
 
   // Validate the required parameters
   if (!prodId || prodId.length != 6) {
@@ -106,7 +106,7 @@ function getImageUrl(ownRef: string) {
   return imageUrl;
 }
 
-async function getSharepointUrl(entidade = '00045', timeout = 3000) {
+async function getSharepointUrl(prodId: string, timeout = 3000) {
   // configure abort controller
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeout);
@@ -115,7 +115,7 @@ async function getSharepointUrl(entidade = '00045', timeout = 3000) {
     const res = await fetch(
       process.env.NEXT_PUBLIC_LOCAL_SOURCE +
       "/localdb/data" +
-      `/${entidade}` +
+      `/${prodId}` +
       `?token=${generateJwtToken("any")}`,
       { signal: controller.signal }
     );
@@ -126,11 +126,11 @@ async function getSharepointUrl(entidade = '00045', timeout = 3000) {
       throw (`Failed to fetch SharePoint URL. Status: ${res.status}`);
     }
 
-    const result = await res.json();
-    return result as string
+    const result = await res.json(); // something like: /sites/AreadeClienteDivmac/Documentos Partilhados/...
+    return 'https://pintobrasilsgps.sharepoint.com' + result;
 
   } catch (error: any) {
-    console.error("Error fetching SharePoint URL:", error);
+    console.error("Error fetching SharePoint URL:", error.message);
     return "";
   }
 

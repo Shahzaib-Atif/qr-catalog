@@ -17,7 +17,7 @@ const nextConfig = {
         "localhost",
         "http://localhost:3010",
         "https://internal.divmac.pt/",
-        "https://znqqb1mg-3010.uks1.devtunnels.ms",
+        "https://prix-exam-tone-situation.trycloudflare.com",
     ],
 };
 
