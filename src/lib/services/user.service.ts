@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { IAuthRepository } from "../domain/interfaces";
 import { GetUserSchema } from "../dtos/user.dto";
 import { PrismaAuthRepository } from "../repositories/prisma/repo.prisma.auth";
+import { serverConfig } from "../config";
 
 const authRepo: IAuthRepository = new PrismaAuthRepository();
 
@@ -39,13 +40,13 @@ export async function signIn(username: string, password: string) {
     try {
         // validate user
         if (!username) { throw ("invalid username or email") }
-        const envUser = process.env.DEFAULT_ADMIN_USERNAME;
+        const envUser = serverConfig.DEFAULT_ADMIN_USERNAME;
         if (!envUser) { throw ("Unable to read from env!") }
         const isUserValid = envUser?.toLowerCase() === username?.toLowerCase();
         if (!isUserValid) { throw ("User not found!"); }
 
         // validate password
-        const envPwd = process.env.DEFAULT_ADMIN_PWD;
+        const envPwd = serverConfig.DEFAULT_ADMIN_PWD;
         if (!envPwd) { throw ("Unable to read from env!") }
         const isPassValid = envPwd === password;
         if (!isPassValid) { throw ("Invalid password!"); }

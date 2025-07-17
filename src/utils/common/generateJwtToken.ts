@@ -1,3 +1,5 @@
+import { serverConfig } from "@/lib/config";
+
 const jwt = require('jsonwebtoken');
 
 export function generateJwtToken(value: string) {
@@ -5,6 +7,6 @@ export function generateJwtToken(value: string) {
         {
             value, // optional: for stricter checks
         },
-        process.env.JWT_SECRET,
+        serverConfig.JWT_SECRET,
     );
 }

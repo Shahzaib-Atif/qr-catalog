@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import { metadataObj } from "@/utils/common/metadataObj";
 import Loader from "@/components/common/Loader";
 import { generateJwtToken } from "@/utils/common/generateJwtToken";
+import { clientConfig } from "@/lib/config";
 
 // Optional
 export const metadata = metadataObj;
@@ -99,7 +100,7 @@ function getImageUrl(ownRef: string) {
 
   const jwtToken = generateJwtToken("anyvalue");
   const imageUrl =
-    process.env.NEXT_PUBLIC_LOCAL_SOURCE +
+    clientConfig.NEXT_PUBLIC_LOCAL_SOURCE +
     "/images" +
     `/${codivmacId}` +
     `?token=${jwtToken}`;
@@ -113,7 +114,7 @@ async function getSharepointUrl(prodId: string, timeout = 3000) {
 
   try {
     const res = await fetch(
-      process.env.NEXT_PUBLIC_LOCAL_SOURCE +
+      clientConfig.NEXT_PUBLIC_LOCAL_SOURCE +
       "/localdb/data" +
       `/${prodId}` +
       `?token=${generateJwtToken("any")}`,

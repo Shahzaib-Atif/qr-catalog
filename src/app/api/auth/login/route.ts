@@ -1,3 +1,4 @@
+import { serverConfig } from "@/lib/config";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -5,8 +6,8 @@ export async function POST(req: Request) {
     const { username, password } = body;
 
     const isValid =
-        username?.toLowerCase() === process.env.DEFAULT_ADMIN_USERNAME?.toLowerCase() &&
-        password === process.env.DEFAULT_ADMIN_PWD;
+        username?.toLowerCase() === serverConfig.DEFAULT_ADMIN_USERNAME?.toLowerCase() &&
+        password === serverConfig.DEFAULT_ADMIN_PWD;
 
     if (!isValid) {
         return NextResponse.json({ success: false, message: "Invalid credentials" }, { status: 401 })
