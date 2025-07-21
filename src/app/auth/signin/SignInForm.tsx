@@ -2,17 +2,16 @@ import ErrorAlert from "@/components/ErrorAlert";
 import EmailIcon from "@/components/Icons/EmailIcon";
 import EyeIcon from "@/components/Icons/EyeIcon";
 import EyeSlashIcon from "@/components/Icons/EyeSlashIcon";
-import PasswordIcon from "@/components/Icons/PasswordIcon";
 import SpinnerOne from "@/components/Spinners/SpinnerOne";
-import Link from "next/link";
 import { useState } from "react";
 
-export default function SignInForm(props: {
+type SignInFormProps = {
   handleSubmit: (event: any) => Promise<void>;
   loading: boolean;
   error: string;
-}) {
-  const { handleSubmit, loading, error } = props;
+}
+
+export default function SignInForm({ handleSubmit, loading, error }: SignInFormProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (

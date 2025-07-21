@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { metadataObj } from "@/utils/common/metadataObj";
-import SignInPage from "./components/Signup";
+import SignUpPage from "./components/Signup";
 
 export const metadata = metadataObj;
 
 const SignUp: React.FC = () => {
   return (
     <DefaultLayout>
-      <SignInPage />
+      <SignUpPage />
     </DefaultLayout>
   );
 };

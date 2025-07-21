@@ -2,11 +2,6 @@ export const serverConfig = {
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
     JWT_SECRET: process.env.JWT_SECRET,
 
-    USER: process.env.USER,
-    PASSWORD: process.env.PASSWORD,
-    SERVER: process.env.SERVER,
-    DATABASE: process.env.DATABASE,
-
     DEFAULT_ADMIN_USERNAME: process.env.DEFAULT_ADMIN_USERNAME,
     DEFAULT_ADMIN_PWD: process.env.DEFAULT_ADMIN_PWD,
 }

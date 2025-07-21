@@ -9,7 +9,6 @@ const initialState = {
   productId: "",
   ownRef: "",
   clientRef: "",
-  sharepointUrl: "",
 }
 
 type formDataStateType = typeof initialState;
@@ -37,7 +36,7 @@ export function GenerateLinkPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    if (name === "sharepointUrl" || name === "clientRef") {
+    if (name === "clientRef") {
       const encodedValue = encodeURIComponent(btoa(value));
       dispatch({ name, value: encodedValue }) // use encoded value
     } else {
